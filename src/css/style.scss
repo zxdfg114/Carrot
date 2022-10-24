@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: #111;
+  text-decoration: none;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Noto Sans KR", "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+main {
+  display: flex;
+}
+
+header {
+  display: flex;
+  background-color: #8977ad;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+
+  span {
+    cursor: pointer;
+    color: #eee;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  h1 {
+    margin: 0 5%;
+    color: white;
+  }
+
+  li {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.wrap {
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  flex-wrap: wrap;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-width: 150px;
+  border: 1px solid #eee;
+  padding-left: 10%;
+  cursor: pointer;
+
+  .thumbnail {
+    width: 90%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+  img {
+    max-width: 200px;
+    width: 100%;
+    min-height: 200px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .price {
+    font-weight: bold;
+  }
+}
+
+.container {
+  width: 90%;
+  margin: 20px auto;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    label {
+      font-size: 18px;
+      margin-bottom: 1%;
+      padding-left: 2%;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="tel"] {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      padding: 10px 30px;
+      border: 1px solid #ddd;
+      outline: 0;
+      margin-bottom: 3%;
+      transition: all 0.3s;
+      padding-left: 2%;
+
+      &:focus {
+        box-shadow: 0 0 5px #8977ad;
+        border: 1px solid rgb(137, 119, 173);
+      }
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      margin-top: 3%;
+      color: #fff;
+      cursor: pointer;
+      background-color: rgba(137, 119, 173, 0.8);
+      border-radius: 10px;
+      border: 0;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: rgba(137, 119, 173, 1);
+      }
+    }
+    .form-control:focus {
+      box-shadow: 0 0 5px #8977ad;
+      border: 1px solid rgb(137, 119, 173);
+    }
+
+    .form-floating {
+      width: 100%;
+      margin-top: 3%;
+
+      textarea {
+        height: 300px;
+      }
+    }
+  }
+}
