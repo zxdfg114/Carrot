@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import { db } from "../index";
 
 const Detail = (props) => {
@@ -17,25 +18,13 @@ const Detail = (props) => {
     detailData();
   }, []);
 
-  console.log(data);
-  console.log(props.uid);
-
   return (
     <div className="wrap">
       <div className="container">
-        상세페이지임
-        {data.uid === props.uid && (
-          <button
-            onClick={() => {
-              navigate(`/edit/${id}`);
-            }}
-          >
-            수정하기
-          </button>
-        )}
+        <h1>상세보기</h1>
         <div className="detail-pic my-4"></div>
         <div>
-          <h5>{data.작성자}</h5>
+          <h2>{data.작성자}</h2>
           <hr />
           <h5 className="title">{data.상품명}</h5>
           <img src={data.image} alt="" />
@@ -43,6 +32,16 @@ const Detail = (props) => {
           {/* 날짜 좀 나중에 넣어보자 */}
           <p className="price">{data.가격}</p>
           <p className="desc">{data.내용}</p>
+          {data.uid === props.uid && (
+            <Button
+              variant="primary"
+              onClick={() => {
+                navigate(`/edit/${id}`);
+              }}
+            >
+              수정하기
+            </Button>
+          )}
         </div>
       </div>
     </div>
