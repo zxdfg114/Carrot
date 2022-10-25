@@ -14,6 +14,7 @@ import Signup from "./routes/Signup";
 import Signin from "./routes/SignIn";
 import Detail from "./routes/Detail";
 import Edit from "./routes/Edit";
+import Chat from "./routes/Chat";
 
 function App() {
   const [data, setData] = useState([]);
@@ -82,15 +83,16 @@ function App() {
             element={<Signin user={user} setUser={setUser} />}
           />
           <Route
-            path={"detail/:id"}
+            path={"/detail/:id"}
             element={<Detail data={data} setData={setData} uid={uid} />}
           />
           <Route
-            path={"edit/:product"}
+            path={"/edit/:product"}
             element={
               <Edit data={data} setData={setData} uid={uid} user={user} />
             }
           />
+          <Route path={"/chat/:id"} element={<Chat uid={uid} />} />
         </Routes>
       </main>
     </>

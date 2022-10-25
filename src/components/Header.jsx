@@ -7,7 +7,13 @@ const Header = (props) => {
   const navigate = useNavigate();
   return (
     <header>
-      <h1>LOGO</h1>
+      <h1
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        LOGO
+      </h1>
       {props.user === null ? (
         <span
           onClick={() => {

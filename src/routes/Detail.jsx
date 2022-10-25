@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { db } from "../index";
 
 const Detail = (props) => {
+  //data는 이 페이지에서만 사용할 state
   const navigate = useNavigate();
   const [data, setData] = useState("");
   let { id } = useParams();
@@ -38,10 +39,30 @@ const Detail = (props) => {
               onClick={() => {
                 navigate(`/edit/${id}`);
               }}
+              style={{ marginRight: "10px", display: "inline-block" }}
             >
               수정하기
             </Button>
           )}
+          <Button
+            style={{
+              backgroundColor: "#8977ad",
+              border: "0",
+              display: "inline-block",
+            }}
+            onClick={() => {
+              // 0번 : 현재 로그인중인 유저
+              // 1번 : 상품에 저장된 유저
+              db.collection("chatroom").add({
+                who: [props.uid, data.uid],
+                date: new Date(),
+                product: data.상품명,
+              });
+              navigate(`/chat/${props.uid}`);
+            }}
+          >
+            채팅
+          </Button>
         </div>
       </div>
     </div>

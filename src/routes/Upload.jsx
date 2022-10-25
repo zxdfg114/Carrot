@@ -58,8 +58,6 @@ const Upload = (props) => {
                   작성자: props.user,
                 };
 
-                console.log(db.collection("product"));
-
                 db.collection("product")
                   .add(itemData)
                   .then((doc) => {

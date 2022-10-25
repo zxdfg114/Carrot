@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from "../index";
+import "firebase/firestore";
 import firebase from "firebase/app";
 import "firebase/auth";
 
 const Signup = (props) => {
   const navigate = useNavigate();
-  const user = firebase.auth().currentUser;
-  // console.log(user);
 
   return (
     <div className="container">
@@ -20,17 +20,27 @@ const Signup = (props) => {
           e.preventDefault();
           const email = e.target[0].value;
           const password = e.target[1].value;
+          const username = e.target[2].value;
 
           firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then((result) => {
-              result.user
-                .updateProfile({ displayName: e.target[2].value })
-                .then((result) => {
-                  props.setUser(e.target[2].value);
-                  navigate("/");
+              result.user.updateProfile({ displayName: e.target[2].value });
+
+              db.collection("user")
+                .doc(result.user.uid)
+                .set({
+                  name: username,
+                  uid: result.user.uid,
+                  email: email,
+                })
+                .then(() => {
+                  props.setUser(username);
                 });
+            })
+            .then((resolve) => {
+              navigate("/");
             });
         }}
       >
