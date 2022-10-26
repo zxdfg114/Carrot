@@ -44,25 +44,27 @@ const Detail = (props) => {
               수정하기
             </Button>
           )}
-          <Button
-            style={{
-              backgroundColor: "#8977ad",
-              border: "0",
-              display: "inline-block",
-            }}
-            onClick={() => {
-              // 0번 : 현재 로그인중인 유저
-              // 1번 : 상품에 저장된 유저
-              db.collection("chatroom").add({
-                who: [props.uid, data.uid],
-                date: new Date(),
-                product: data.상품명,
-              });
-              navigate(`/chat/${props.uid}`);
-            }}
-          >
-            채팅
-          </Button>
+          {data.uid === props.uid ? null : (
+            <Button
+              style={{
+                backgroundColor: "#8977ad",
+                border: "0",
+                display: "inline-block",
+              }}
+              onClick={() => {
+                // 0번 : 현재 로그인중인 유저
+                // 1번 : 상품에 저장된 유저
+                db.collection("chatroom").add({
+                  who: [props.uid, data.uid],
+                  date: new Date(),
+                  product: data.상품명,
+                });
+                navigate(`/chat/${props.uid}`);
+              }}
+            >
+              채팅
+            </Button>
+          )}
         </div>
       </div>
     </div>
