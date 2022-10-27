@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../index";
 import "firebase/firestore";
@@ -69,7 +69,7 @@ const Chat = (props) => {
                     db.collection("chatroom")
                       .doc(String(chatRoom[i].id))
                       .collection("messages")
-                      .orderBy("when", "asc")
+                      .orderBy("when", "desc")
                       .onSnapshot((result) => {
                         result.forEach((doc) => {
                           const message = doc.data();
