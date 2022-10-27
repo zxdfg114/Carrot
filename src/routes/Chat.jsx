@@ -17,13 +17,18 @@ const Chat = (props) => {
   let [chatMessages, setChatMessages] = useState(null);
   let _messages = [];
 
-  function checkMine(i) {
+  /**
+   *
+   * @param {*} i map의 index값 활용
+   * @returns 현재 로그인된유저가 메시지 작성자인지 판별하는 함수
+   */
+  const checkMine = (i) => {
     if (chatMessages[i].uid === props.uid) {
       return "mine";
     } else {
       return "";
     }
-  }
+  };
 
   /**
    * 채팅방 목록 가져오는 함수
