@@ -1,4 +1,5 @@
 @use "chat";
+@use "chatBtn";
 
 * {
   margin: 0;
@@ -195,6 +196,7 @@ header {
       display: block;
       width: 100%;
       padding: 10px 20px;
+      overflow: hidden;
     }
   }
 }

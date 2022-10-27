@@ -5,13 +5,29 @@ import "firebase/firestore";
 
 const Chat = (props) => {
   let { id } = useParams();
+  let [mine, setMine] = useState("");
   /**
    * 화면상 ui 구성에 사용할 state
    */
   let [chatRoom, setChatRoom] = useState([]);
+  //메시지를 어느 채팅방에 저장할 건지 설정
+  let [chatRoomId, setChatRoomId] = useState(null);
   let _chatRoom = [...chatRoom];
   // props.uid === 현재 로그인중인 유저의 uid
+  let [chatMessages, setChatMessages] = useState(null);
+  let _messages = [];
 
+  function checkMine(i) {
+    if (chatMessages[i].uid === props.uid) {
+      return "mine";
+    } else {
+      return "";
+    }
+  }
+
+  /**
+   * 채팅방 목록 가져오는 함수
+   */
   async function getData() {
     const dbData = db
       .collection("chatroom")
@@ -19,7 +35,9 @@ const Chat = (props) => {
       .get();
     const response = await dbData;
     response.forEach((doc) => {
-      _chatRoom.push(doc.data());
+      const items = doc.data();
+      items.id = doc.id;
+      _chatRoom.push(items);
       setChatRoom(_chatRoom);
     });
   }
@@ -27,8 +45,6 @@ const Chat = (props) => {
   useEffect(() => {
     getData();
   }, []);
-
-  // console.log(chatRoom);
 
   return (
     <div className="container p-4 detail">
@@ -41,35 +57,77 @@ const Chat = (props) => {
             </li>
             {chatRoom.map((x, i) => {
               return (
-                <li className="list-group-item" key={i}>
+                /**
+                 * 채팅내용 가져오는 함수
+                 */
+                <li
+                  className="list-group-item"
+                  key={i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setChatRoomId(chatRoom[i].id);
+                    db.collection("chatroom")
+                      .doc(String(chatRoom[i].id))
+                      .collection("messages")
+                      .orderBy("when", "asc")
+                      .onSnapshot((result) => {
+                        result.forEach((doc) => {
+                          const message = doc.data();
+                          _messages.push(message);
+                          setChatMessages(_messages);
+                        });
+                      });
+                  }}
+                >
                   <h6>{chatRoom[i].product}</h6>
-                  <h6 className="text-small">{chatRoom[i].who[1]}</h6>
+                  <h6 className="text-small">{chatRoom[i].id}</h6>
                 </li>
               );
             })}
           </ul>
         </div>
-        <div className="col-9 p-0">
-          <div className="chat-room">
-            <ul className="list-group chat-content">
-              <li>
-                <span className="chat-box">채팅방1 내용</span>
-              </li>
-              <li>
-                <span className="chat-box">채팅방1 내용</span>
-              </li>
-              <li>
-                <span className="chat-box mine">채팅방1 내용</span>
-              </li>
-            </ul>
-            <div className="input-group">
-              <input className="form-control" id="chat-input" />
-              <button className="btn btn-secondary" id="send">
-                전송
-              </button>
+        {chatRoomId === null ? null : (
+          <div className="col-9 p-0">
+            <div className="chat-room">
+              <ul className="list-group chat-content">
+                {chatMessages?.map((x, i) => {
+                  return (
+                    <li key={i}>
+                      <span className={`chat-box ${checkMine(i)}`}>
+                        {chatMessages[i].input}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <form
+                className="chat-input"
+                onSubmit={(e) => {
+                  const message = {
+                    input: e.target[0].value,
+                    when: new Date(),
+                    uid: props.uid,
+                  };
+                  _messages.push(message);
+                  setChatMessages(_messages);
+                  db.collection("chatroom")
+                    .doc(String(chatRoomId))
+                    .collection("messages")
+                    .add(message)
+                    .then(() => {
+                      e.target[0].value = "";
+                    });
+                  e.preventDefault();
+                }}
+              >
+                <input type="text" className="chat-message" />
+                <button className="chat-send" type="submit">
+                  전송
+                </button>
+              </form>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

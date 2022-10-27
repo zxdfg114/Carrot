@@ -15,6 +15,7 @@ import Signin from "./routes/SignIn";
 import Detail from "./routes/Detail";
 import Edit from "./routes/Edit";
 import Chat from "./routes/Chat";
+import OpenChat from "./components/OpenChat";
 
 function App() {
   const [data, setData] = useState([]);
@@ -94,6 +95,7 @@ function App() {
           />
           <Route path={"/chat/:id"} element={<Chat uid={uid} />} />
         </Routes>
+        {loggedIn && <OpenChat uid={uid} />}
       </main>
     </>
   );

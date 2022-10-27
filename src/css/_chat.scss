@@ -20,3 +20,17 @@
 .mine {
   float: right;
 }
+
+.chat-room .chat-input {
+  display: flex;
+  flex-direction: row;
+
+  .chat-message {
+    width: 85%;
+  }
+
+  .chat-send {
+    width: 15%;
+    margin: 0;
+  }
+}

@@ -67,6 +67,9 @@ const Header = (props) => {
                 .signOut()
                 .then(() => {
                   props.setUser(null);
+                })
+                .then(() => {
+                  navigate("/");
                 });
             }}
           >

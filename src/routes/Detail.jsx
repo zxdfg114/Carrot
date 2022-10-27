@@ -15,8 +15,18 @@ const Detail = (props) => {
     setData(result.data());
   }
 
+  async function checkOverlap() {
+    const dbData = db.collection("chatroom").where("who", "==", true).get();
+    const response = await dbData;
+    response.forEach((x) => console.log(x.data()));
+  }
+
   useEffect(() => {
     detailData();
+  }, []);
+
+  useEffect(() => {
+    checkOverlap();
   }, []);
 
   return (

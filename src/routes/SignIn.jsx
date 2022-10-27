@@ -24,8 +24,11 @@ const SignIn = (props) => {
             .signInWithEmailAndPassword(e.target[0].value, e.target[1].value)
             .then((user) => {
               props.setUser(user.displayName);
+              navigate("/");
+            })
+            .catch((error) => {
+              console.log(error);
             });
-          navigate("/");
         }}
       >
         <label htmlFor="title">이메일</label>
