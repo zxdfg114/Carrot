@@ -14,13 +14,13 @@ const Chat = (props) => {
   let [chatRoomId, setChatRoomId] = useState(null);
   let _chatRoom = [...chatRoom];
   // props.uid === 현재 로그인중인 유저의 uid
-  let [chatMessages, setChatMessages] = useState(null);
-  let _messages = [];
+  let [chatMessages, setChatMessages] = useState([]);
+  let _messages = [...chatMessages];
 
   /**
    *
    * @param {*} i map의 index값 활용
-   * @returns 현재 로그인된유저가 메시지 작성자인지 판별하는 함수
+   * @returns 현재 로그인된 유저가 메시지 작성자인지 판별하는 함수
    */
   const checkMine = (i) => {
     if (chatMessages[i].uid === props.uid) {
@@ -69,7 +69,6 @@ const Chat = (props) => {
                   className="list-group-item"
                   key={i}
                   onClick={(e) => {
-                    e.stopPropagation();
                     setChatRoomId(chatRoom[i].id);
                     db.collection("chatroom")
                       .doc(String(chatRoom[i].id))
@@ -108,19 +107,19 @@ const Chat = (props) => {
               <form
                 className="chat-input"
                 onSubmit={(e) => {
-                  const message = {
+                  const myMessage = {
                     input: e.target[0].value,
                     when: new Date(),
                     uid: props.uid,
                   };
-                  _messages.push(message);
-                  setChatMessages(_messages);
                   db.collection("chatroom")
                     .doc(String(chatRoomId))
                     .collection("messages")
-                    .add(message)
+                    .add(myMessage)
                     .then(() => {
                       e.target[0].value = "";
+                      _messages.unshift(myMessage);
+                      setChatMessages(_messages);
                     });
                   e.preventDefault();
                 }}
