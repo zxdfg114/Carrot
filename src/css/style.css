@@ -38,6 +38,9 @@
   width: 15%;
   margin: 0;
 }
+.chat-room .chat-input .chat-send i {
+  font-size: 20px;
+}
 
 #chat-oppener {
   width: 50px;
@@ -245,5 +248,6 @@ header li {
   width: 100%;
   padding: 10px 20px;
   overflow: hidden;
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

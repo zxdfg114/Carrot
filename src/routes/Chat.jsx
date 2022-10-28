@@ -6,6 +6,7 @@ import "firebase/firestore";
 const Chat = (props) => {
   let { id } = useParams();
   let [mine, setMine] = useState("");
+  let [isFirstMsg, setIsFirstMsg] = useState(true);
   /**
    * 화면상 ui 구성에 사용할 state
    */
@@ -56,30 +57,30 @@ const Chat = (props) => {
       <div className="row">
         <div className="col-3 p-0">
           <ul className="list-group chat-list">
-            <li className="list-group-item">
-              <h6>채팅방1</h6>
-              <h6 className="text-small">채팅방아이디</h6>
-            </li>
             {chatRoom.map((x, i) => {
               return (
-                /**
-                 * 채팅내용 가져오는 함수
-                 */
                 <li
                   className="list-group-item"
                   key={i}
                   onClick={(e) => {
+                    //클릭시마다 중첩되어 나오는 현상 방지를 위해 메시지 모음 초기화
+                    _messages = [];
+                    e.stopPropagation();
                     setChatRoomId(chatRoom[i].id);
+                    /**
+                     * 채팅내용 가져오는 쿼리문
+                     */
                     db.collection("chatroom")
-                      .doc(String(chatRoom[i].id))
+                      .doc(chatRoom[i].id)
                       .collection("messages")
                       .orderBy("when", "desc")
                       .onSnapshot((result) => {
                         result.forEach((doc) => {
                           const message = doc.data();
                           _messages.push(message);
-                          setChatMessages(_messages);
                         });
+                        //작성된 메시지가 1개도 없을때 state가 변경되지 않던 상황 해결을 위해  set을 아래로 뺐음.
+                        setChatMessages(_messages);
                       });
                   }}
                 >
@@ -94,7 +95,8 @@ const Chat = (props) => {
           <div className="col-9 p-0">
             <div className="chat-room">
               <ul className="list-group chat-content">
-                {chatMessages?.map((x, i) => {
+                {chatMessages === null ? <h1>메시지를 작성해주세요</h1> : null}
+                {chatMessages.map((x, i) => {
                   return (
                     <li key={i}>
                       <span className={`chat-box ${checkMine(i)}`}>
@@ -107,11 +109,14 @@ const Chat = (props) => {
               <form
                 className="chat-input"
                 onSubmit={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   const myMessage = {
                     input: e.target[0].value,
                     when: new Date(),
                     uid: props.uid,
                   };
+                  //css flex-direction : column-reverse 사용했기 때문에 베열에 unshift를 이용하여 삽입
                   db.collection("chatroom")
                     .doc(String(chatRoomId))
                     .collection("messages")
@@ -121,12 +126,11 @@ const Chat = (props) => {
                       _messages.unshift(myMessage);
                       setChatMessages(_messages);
                     });
-                  e.preventDefault();
                 }}
               >
-                <input type="text" className="chat-message" />
+                <input type="text" className="chat-message" required />
                 <button className="chat-send" type="submit">
-                  전송
+                  <i className="fa fa-send"></i>
                 </button>
               </form>
             </div>
