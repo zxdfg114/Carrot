@@ -31,7 +31,7 @@ const Header = (props) => {
             navigate("/");
           }}
         >
-          중고거래
+          팝니다
         </li>
         {props.loggedIn && (
           <li
@@ -76,6 +76,9 @@ const Header = (props) => {
             로그아웃
           </li>
         )}
+      </ul>
+      <ul className="user">
+
       </ul>
     </header>
   );

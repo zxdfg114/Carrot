@@ -15,33 +15,48 @@ const Detail = (props) => {
     setData(result.data());
   }
 
+  /**
+   * 상품명과 로그인된 유저를 기준으로 중복된 채팅방이 존재하는지 여부를 검사
+   */
   async function checkOverlap() {
-    const dbData = db.collection("chatroom").where("who", "==", true).get();
-    const response = await dbData;
-    response.forEach((x) => console.log(x.data()));
+    const dbData = db
+      .collection("chatroom")
+      .where("product", "==", data.상품명)
+      .where("who", "array-contains", props.uid)
+      .get();
+    const result = await dbData;
+    if (result.size === 0) {
+      db.collection("chatroom")
+        .add({
+          who: [props.uid, data.uid],
+          date: new Date(),
+          product: data.상품명,
+        })
+        .then(() => {
+          console.log("새로운 채팅방 개설 성공!");
+          navigate(`/chat/${props.uid}`);
+        });
+    } else {
+      console.log("이미 개설된 채팅방이 있습니다");
+      navigate(`/chat/${props.uid}`);
+    }
   }
 
   useEffect(() => {
     detailData();
   }, []);
 
-  useEffect(() => {
-    checkOverlap();
-  }, []);
-
   return (
-    <div className="wrap">
-      <div className="container">
-        <h1>상세보기</h1>
-        <div className="detail-pic my-4"></div>
-        <div>
-          <h2>{data.작성자}</h2>
-          <hr />
+    <>
+      <div className="detail">
+        <div className="detail-product">
           <h5 className="title">{data.상품명}</h5>
+          <h5>{data.작성자}</h5>
+          <hr />
           <img src={data.image} alt="" />
           <p className="date">{}</p>
           {/* 날짜 좀 나중에 넣어보자 */}
-          <p className="price">{data.가격}</p>
+          <p className="price">{parseInt(data.가격).toLocaleString()}원</p>
           <p className="desc">{data.내용}</p>
           {data.uid === props.uid && (
             <Button
@@ -54,6 +69,7 @@ const Detail = (props) => {
               수정하기
             </Button>
           )}
+          {/* 로그인된 유저와 게시물 작성자가 다를경우에만 채팅방 만들기보이게 설정 */}
           {data.uid === props.uid ? null : (
             <Button
               style={{
@@ -62,22 +78,15 @@ const Detail = (props) => {
                 display: "inline-block",
               }}
               onClick={() => {
-                // 0번 : 현재 로그인중인 유저
-                // 1번 : 상품에 저장된 유저
-                db.collection("chatroom").add({
-                  who: [props.uid, data.uid],
-                  date: new Date(),
-                  product: data.상품명,
-                });
-                navigate(`/chat/${props.uid}`);
+                checkOverlap();
               }}
             >
-              채팅
+              1:1 채팅
             </Button>
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

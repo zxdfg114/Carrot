@@ -53,7 +53,7 @@ const Chat = (props) => {
   }, []);
 
   return (
-    <div className="container p-4 detail">
+    <div className="chat container">
       <div className="row">
         <div className="col-3 p-0">
           <ul className="list-group chat-list">

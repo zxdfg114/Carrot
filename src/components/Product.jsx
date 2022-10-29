@@ -34,7 +34,9 @@ const Product = (props) => {
             <div className="description">
               <h5 className="title">{props.data[i].상품명}</h5>
               <p className="date">2030년 1월 8일</p>
-              <p className="price">{props.data[i].가격}원</p>
+              <p className="price">
+                {parseInt(props.data[i].가격).toLocaleString()}원
+              </p>
               <p></p>
             </div>
           </div>
