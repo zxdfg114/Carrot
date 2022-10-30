@@ -17,16 +17,18 @@ import Edit from "./routes/Edit";
 import Chat from "./routes/Chat";
 import OpenChat from "./components/OpenChat";
 import Footer from "./components/Footer";
+import Hero from "./components/Hero";
 
 function App() {
   const [data, setData] = useState([]);
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [uid, setUid] = useState(null);
-
+  // data state는 배열이라서 !
   const _data = [...data];
+  //상품정보 가져오는 함수
   async function getData() {
-    const dbData = db.collection("product").get();
+    const dbData = db.collection("product").orderBy("날짜", "desc").get();
     const result = await dbData;
     result.forEach((doc) => {
       const items = doc.data();
@@ -68,7 +70,13 @@ function App() {
         <Routes>
           <Route
             path={"/"}
-            element={<Product data={data} setData={setData} />}
+            element={
+              <>
+                <Hero />
+                <div className="trade">전체 매물</div>
+                <Product data={data} setData={setData} />
+              </>
+            }
           />
           <Route
             path={"/upload"}

@@ -7,7 +7,7 @@ const Detail = (props) => {
   //data는 이 페이지에서만 사용할 state
   const navigate = useNavigate();
   const [data, setData] = useState("");
-  let { id } = useParams();
+  const { id } = useParams();
 
   async function detailData() {
     const detail = db.collection("product").doc(id).get();

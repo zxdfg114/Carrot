@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const SignIn = (props) => {
-  let [fail, setFail] = useState(false);
+  const [fail, setFail] = useState(false);
+  const [fade, setFade] = useState("");
   const navigate = useNavigate();
 
   firebase.auth().onAuthStateChanged((user) => {
@@ -19,6 +21,7 @@ const SignIn = (props) => {
       <form
         action=""
         onSubmit={(e) => {
+          setFade("");
           e.preventDefault();
           firebase
             .auth()
@@ -31,6 +34,9 @@ const SignIn = (props) => {
             .catch((error) => {
               console.error(error);
               setFail(true);
+              setTimeout(() => {
+                setFade("fade-in");
+              }, 100);
             });
         }}
       >
@@ -40,13 +46,12 @@ const SignIn = (props) => {
         <input
           type="password"
           autoComplete="off"
-          // name="price"
           placeholder="비밀번호를 입력해주세요"
           minLength="6"
           required
         />
         {fail && (
-          <span className="login-failed">
+          <span className={`login-failed ${fade}`}>
             로그인에 실패하였습니다. 이메일 혹은 비밀번호를 확인해주세요
           </span>
         )}

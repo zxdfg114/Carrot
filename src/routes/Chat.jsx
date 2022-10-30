@@ -4,9 +4,9 @@ import { db } from "../index";
 import "firebase/firestore";
 
 const Chat = (props) => {
-  let { id } = useParams();
-  let [active, setActive] = useState(null);
-  let [userName, setUserName] = useState(null);
+  const { id } = useParams();
+  const [active, setActive] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   /**
    * 화면상 ui 구성에 사용할 state
@@ -35,7 +35,7 @@ const Chat = (props) => {
   /**
    *
    * @param {*:} i
-   * @returns 현재 보고있는 채팅방 표시하려고 만든 함수
+   * @returns 현재 보고있는 채팅방 표시하려고 만든 함수, className에 삽입하여 구분함
    */
   const handleOn = (i) => {
     if (active === i) {

@@ -13,14 +13,14 @@ import { storage } from "../index";
 const Edit = (props) => {
   //이 페이지 내에서만 사용할 하나의 doc
   const [data, setData] = useState("");
-  let { product } = useParams();
-  let dataCopied = [...props.data];
+  const { product } = useParams();
+  const dataCopied = [...props.data];
 
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(0);
   const [prdcTitle, setPrdcTitle] = useState(" ");
-  let modalTitle = `상품 등록 완료!`;
-  let modalContent = `상품이 정상적으로 등록되었습니다`;
+  const modalTitle = `상품 등록 완료!`;
+  const modalContent = `상품이 정상적으로 등록되었습니다`;
 
   async function editData() {
     const detail = db.collection("product").doc(product).get();
@@ -116,7 +116,7 @@ const Edit = (props) => {
         <label htmlFor="image" className="custom-file-upload">
           사진{" "}
         </label>
-        <Form.Control type="file" size="md" />
+        <Form.Control type="file" size="md" defaultValue={data.image} />
         <FloatingLabel
           controlId="floatingTextarea2"
           label={data.내용}
