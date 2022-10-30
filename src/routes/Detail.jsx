@@ -21,10 +21,11 @@ const Detail = (props) => {
   async function checkOverlap() {
     const dbData = db
       .collection("chatroom")
-      .where("product", "==", data.상품명)
       .where("who", "array-contains", props.uid)
+      .where("product", "==", data.상품명)
       .get();
     const result = await dbData;
+    console.log(result);
     if (result.size === 0) {
       db.collection("chatroom")
         .add({
@@ -38,6 +39,7 @@ const Detail = (props) => {
         });
     } else {
       console.log("이미 개설된 채팅방이 있습니다");
+
       navigate(`/chat/${props.uid}`);
     }
   }
@@ -52,9 +54,9 @@ const Detail = (props) => {
         <div className="detail-product">
           <h5 className="title">{data.상품명}</h5>
           <h5>{data.작성자}</h5>
+          <p className="date">{data.날짜}</p>
           <hr />
           <img src={data.image} alt="" />
-          <p className="date">{}</p>
           {/* 날짜 좀 나중에 넣어보자 */}
           <p className="price">{parseInt(data.가격).toLocaleString()}원</p>
           <p className="desc">{data.내용}</p>

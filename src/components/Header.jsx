@@ -12,26 +12,15 @@ const Header = (props) => {
           navigate("/");
         }}
       >
-        LOGO
+        FAKE
       </h1>
-      {props.user === null ? (
-        <span
-          onClick={() => {
-            navigate("/signin");
-          }}
-        >
-          로그인이 필요합니다
-        </span>
-      ) : (
-        <span>{`${props.user}님 안녕하세요!`}</span>
-      )}
-      <ul>
+      <ul className="gnb">
         <li
           onClick={() => {
             navigate("/");
           }}
         >
-          팝니다
+          중고거래
         </li>
         {props.loggedIn && (
           <li
@@ -42,14 +31,21 @@ const Header = (props) => {
             올리기
           </li>
         )}
-        <li
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          회원가입
-        </li>
+
         {/* 로그인 상태에 따라 로그인 로그아웃 변경 */}
+      </ul>
+      <ul className="user">
+        {props.user === null ? (
+          <span
+            onClick={() => {
+              navigate("/signin");
+            }}
+          >
+            로그인이 필요합니다
+          </span>
+        ) : (
+          <span>{`${props.user}`}</span>
+        )}
         {!props.loggedIn && (
           <li
             onClick={() => {
@@ -76,9 +72,15 @@ const Header = (props) => {
             로그아웃
           </li>
         )}
-      </ul>
-      <ul className="user">
-
+        {!props.loggedIn && (
+          <li
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            회원가입
+          </li>
+        )}
       </ul>
     </header>
   );

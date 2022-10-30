@@ -103,6 +103,7 @@ const Edit = (props) => {
           name="title"
           placeholder={data.상품명}
           defaultValue={data.상품명}
+          required
         />
         <label htmlFor="price">가격</label>
         <input
@@ -110,6 +111,7 @@ const Edit = (props) => {
           name="price"
           placeholder={data.가격}
           defaultValue={data.가격}
+          required
         />
         <label htmlFor="image" className="custom-file-upload">
           사진{" "}
