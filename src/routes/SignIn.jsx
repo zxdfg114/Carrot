@@ -50,6 +50,13 @@ const SignIn = (props) => {
           minLength="6"
           required
         />
+        <small
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          아직 회원이 아니신가요? - 5초만에 회원가입하기
+        </small>
         {fail && (
           <span className={`login-failed ${fade}`}>
             로그인에 실패하였습니다. 이메일 혹은 비밀번호를 확인해주세요

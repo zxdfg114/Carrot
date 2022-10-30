@@ -60,7 +60,7 @@ const Detail = (props) => {
           {/* 날짜 좀 나중에 넣어보자 */}
           <p className="price">{parseInt(data.가격).toLocaleString()}원</p>
           <p className="desc">{data.내용}</p>
-          {data.uid === props.uid && (
+          {data.uid === props.uid ? (
             <Button
               variant="primary"
               onClick={() => {
@@ -70,9 +70,9 @@ const Detail = (props) => {
             >
               수정하기
             </Button>
-          )}
-          {/* 로그인된 유저와 게시물 작성자가 다를경우에만 채팅방 만들기보이게 설정 */}
-          {data.uid === props.uid ? null : (
+          ) : null}
+          {/* 로그인된 유저와 게시물 작성자가 다를경우에만 + 로그인이 되어있을때에만 채팅방 만들기 보이게 설정 */}
+          {data.uid !== props.uid && props.loggedIn ? (
             <Button
               style={{
                 backgroundColor: "#8977ad",
@@ -84,6 +84,17 @@ const Detail = (props) => {
               }}
             >
               1:1 채팅
+            </Button>
+          ) : null}
+          {!props.loggedIn && (
+            <Button
+              variant="primary"
+              style={{ color: `#fff` }}
+              onClick={() => {
+                navigate("/signin");
+              }}
+            >
+              로그인 후 판매자와 채팅 이용이 가능합니다
             </Button>
           )}
         </div>

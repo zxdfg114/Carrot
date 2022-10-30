@@ -94,7 +94,14 @@ function App() {
           />
           <Route
             path={"/detail/:id"}
-            element={<Detail data={data} setData={setData} uid={uid} />}
+            element={
+              <Detail
+                data={data}
+                setData={setData}
+                uid={uid}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path={"/edit/:product"}

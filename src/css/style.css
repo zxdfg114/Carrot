@@ -307,7 +307,7 @@ footer small {
 .product img {
   max-width: 200px;
   width: 100%;
-  min-height: 200px;
+  max-height: 250px;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -402,6 +402,10 @@ footer small {
 .container form .form-floating textarea,
 .chat form .form-floating textarea {
   height: 300px;
+}
+.container small,
+.chat small {
+  cursor: pointer;
 }
 
 .login-failed {
