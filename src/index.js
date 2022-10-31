@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/firebase-storage";
 import "firebase/firebase-auth";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDGQ7rNazNMvFOPdafbigX7Hj6O9bCgyp8",
@@ -33,9 +36,11 @@ export const storage = firebase.storage();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

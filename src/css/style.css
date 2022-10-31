@@ -296,6 +296,10 @@ footer small {
   min-width: 150px;
   padding: 0 10%;
   cursor: pointer;
+  transition: all 0.3s;
+}
+.product:hover {
+  box-shadow: 1px 1px 15px #555;
 }
 .product .thumbnail {
   display: flex;
@@ -328,10 +332,19 @@ footer small {
   font-weight: bold;
 }
 
+@media screen and (max-width: 780px) {
+  .wrap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .container,
 .chat {
   width: 90%;
   margin: 20px auto;
+}
+.container h1,
+.chat h1 {
+  font-weight: bold;
 }
 .container form,
 .chat form {

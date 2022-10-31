@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../index";
 import "firebase/firestore";
+import { useQuery } from "react-query";
 
 const Chat = (props) => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const Chat = (props) => {
   // props.uid === 현재 로그인중인 유저의 uid
   let [chatMessages, setChatMessages] = useState([]);
   let _messages = [...chatMessages];
+  const chatContents = useRef(null);
 
   /**
    *
@@ -74,8 +76,13 @@ const Chat = (props) => {
   }
 
   useEffect(() => {
+    _messages = [];
     getData();
   }, []);
+
+  useEffect(() => {
+    chatContents.current?.scrollIntoView({ behaivior: "smooth" });
+  }, [chatMessages]);
 
   return (
     <div className="chat">
@@ -90,7 +97,7 @@ const Chat = (props) => {
               onClick={(e) => {
                 //클릭시마다 중첩되어 나오는 현상 방지를 위해 메시지 모음 초기화
                 setActive(i);
-                _messages = [];
+
                 e.stopPropagation();
                 setChatRoomId(chatRoom[i].id);
                 /**
@@ -100,15 +107,30 @@ const Chat = (props) => {
                   .doc(chatRoom[i].id)
                   .collection("messages")
                   .orderBy("when", "desc")
-                  .onSnapshot((result) => {
-                    result.forEach((doc) => {
-                      const message = doc.data();
+                  .onSnapshot((snapshot) => {
+                    snapshot.forEach((change) => {
+                      const message = change.data();
                       _messages.push(message);
+                      console.log(_messages);
+                      if (change.type === "added") {
+                        const message = change.doc.data();
+                        console.log("add message :" + message.data());
+                        _messages.push(message);
+                      }
+                      if (change.type === "modified") {
+                        const message = change.doc.data();
+                        _messages.push(message);
+                      }
+                      if (change.type === "removed") {
+                        console.log("Removed city: ", change.doc.data());
+                      }
                     });
+
                     //작성된 메시지가 1개도 없을때 state가 변경되지 않던 상황 해결을 위해  set을 아래로 뺐음.
                     setChatMessages(_messages);
                   });
                 getUserName(i);
+                console.log(chatContents);
               }}
             >
               <h6>{chatRoom[i].product}</h6>
@@ -120,7 +142,7 @@ const Chat = (props) => {
       {chatRoomId === null ? null : (
         <div className="chat-room">
           <div className="user-name">{userName}님과의 1:1 채팅입니다</div>
-          <ul className="list-group chat-content">
+          <ul className="list-group chat-content" ref={chatContents}>
             {chatMessages === null ? <h1>메시지를 작성해주세요</h1> : null}
             {chatMessages.map((x, i) => {
               return (
@@ -143,6 +165,7 @@ const Chat = (props) => {
                 uid: props.uid,
               };
               //css flex-direction : column-reverse 사용했기 때문에 베열에 unshift를 이용하여 삽입
+              _messages = [...chatMessages];
               db.collection("chatroom")
                 .doc(String(chatRoomId))
                 .collection("messages")
@@ -151,6 +174,7 @@ const Chat = (props) => {
                   e.target[0].value = "";
                   _messages.unshift(myMessage);
                   setChatMessages(_messages);
+                  console.log(_messages);
                 });
             }}
           >
