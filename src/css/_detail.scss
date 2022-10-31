@@ -1,0 +1,33 @@
+.detail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 0;
+
+  &-product {
+    width: 40%;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1% 0;
+  }
+
+  .price {
+    font-size: 1.5rem;
+    font-style: italic;
+    border-bottom: 1px solid #eee;
+    padding: 1% 0;
+  }
+
+  .desc {
+    min-height: 150px;
+    border-bottom: 1px solid #eee;
+  }
+}

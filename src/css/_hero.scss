@@ -1,0 +1,32 @@
+.hero {
+  background-image: linear-gradient(to right, #4286f4, #373b44);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40vw;
+
+  section {
+    width: 30%;
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      font-size: 3vw;
+      font-family: "Permanant Marker", cursive;
+    }
+
+    p {
+      text-indent: 1vw;
+      font-size: 1vw;
+      color: #fff;
+    }
+  }
+}
+
+.trade {
+  width: 100%;
+  font-size: 2.5vw;
+  font-weight: bolder;
+  padding: 2.5% 10%;
+}
