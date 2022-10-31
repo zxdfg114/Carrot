@@ -25,7 +25,6 @@ const Chat = (props) => {
     .collection("messages")
     .orderBy("when");
 
-
   const chatContents = useRef();
 
   /**
@@ -126,6 +125,7 @@ const Chat = (props) => {
                       let message = change.doc.data();
                       _messages.push(message);
                     });
+                    //concat을 사용해야 state re-render가 일어남
                     setChatMessages(chatMessages.concat(_messages));
                     console.log(chatMessages);
                   });
