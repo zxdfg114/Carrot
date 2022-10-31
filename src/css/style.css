@@ -7,7 +7,7 @@
   overflow-y: scroll;
   padding: 10px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .text-small {
@@ -25,6 +25,8 @@
 
 .mine {
   float: right;
+  background-color: skyblue;
+  color: #fff;
 }
 
 .chat-room .chat-input {
