@@ -19,6 +19,13 @@ const Chat = (props) => {
   // props.uid === 현재 로그인중인 유저의 uid
   let [chatMessages, setChatMessages] = useState([]);
   let _messages = [...chatMessages];
+  const messageQuery = db
+    .collection("chatroom")
+    .doc()
+    .collection("messages")
+    .orderBy("when");
+
+
   const chatContents = useRef();
 
   /**
@@ -76,7 +83,7 @@ const Chat = (props) => {
   }
 
   useEffect(() => {
-    _messages = [];
+    // _messages = [];
     getData();
   }, []);
 
@@ -114,15 +121,13 @@ const Chat = (props) => {
                   .doc(chatRoom[i].id)
                   .collection("messages")
                   .orderBy("when")
-                  .onSnapshot((snapshot) => {
-                    snapshot.docChanges().forEach((change) => {
-                      console.log(change.type);
-                      const message = change.doc.data();
+                  .onSnapshot((querysnapshot) => {
+                    querysnapshot.docChanges().forEach((change) => {
+                      let message = change.doc.data();
                       _messages.push(message);
                     });
-                    //작성된 메시지가 1개도 없을때 state가 변경되지 않던 상황 해결을 위해  set을 아래로 뺐음.
-                    setChatMessages(_messages);
-                    console.log(_messages);
+                    setChatMessages(chatMessages.concat(_messages));
+                    console.log(chatMessages);
                   });
                 getUserName(i);
                 scrollToBottom();
@@ -168,10 +173,8 @@ const Chat = (props) => {
                 .add(myMessage)
                 .then((doc) => {
                   e.target[0].value = "";
-                  console.log(doc);
                   _messages.push(myMessage);
                   setChatMessages(_messages);
-                  console.log(chatMessages);
                   scrollToBottom();
                 });
             }}
