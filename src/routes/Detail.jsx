@@ -79,7 +79,6 @@ const Detail = (props) => {
           {data.uid !== props.uid && props.loggedIn ? (
             <Button
               style={{
-                backgroundColor: "#8977ad",
                 border: "0",
                 display: "inline-block",
                 marginRight: "10px",

@@ -4,8 +4,12 @@ import { db } from "../index";
 import "firebase/firestore";
 import firebase from "firebase/app";
 import "firebase/auth";
+import { useState } from "react";
 
 const Signup = (props) => {
+  const [fail, setFail] = useState(false);
+  const [fade, setFade] = useState("");
+  const [notice, setNotice] = useState(null);
   const navigate = useNavigate();
 
   return (
@@ -41,6 +45,16 @@ const Signup = (props) => {
             })
             .then((resolve) => {
               navigate("/");
+              setNotice(null);
+              setFail(false);
+            })
+            .catch((error) => {
+              console.log(error);
+              setFail(true);
+              setTimeout(() => {
+                setFade("fade-in");
+              }, 100);
+              setNotice(error.message);
             });
         }}
       >
@@ -63,6 +77,7 @@ const Signup = (props) => {
           autoComplete="chrome-off"
           // required
         />
+        {fail && <span className={`login-failed ${fade}`}>{notice}</span>}
         <button type="submit">가입하기</button>
       </form>
     </div>
