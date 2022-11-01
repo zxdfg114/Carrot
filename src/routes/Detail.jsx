@@ -60,7 +60,7 @@ const Detail = (props) => {
           {/* 날짜 좀 나중에 넣어보자 */}
           <p className="price">{parseInt(data.가격).toLocaleString()}원</p>
           <p className="desc">{data.내용}</p>
-          {data.uid === props.uid ? (
+          {data.uid === props.uid || props.admin ? (
             <Button
               variant="primary"
               onClick={() => {

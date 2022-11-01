@@ -22,6 +22,7 @@ import Hero from "./components/Hero";
 function App() {
   const [data, setData] = useState([]);
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [uid, setUid] = useState(null);
   // data state는 배열이라서 !
@@ -41,12 +42,13 @@ function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(`${user.displayName} 로그인중`);
         setLoggedIn(true);
         setUser(user.displayName);
         setUid(user.uid);
+        if (user.email === "chat3@gmail.com") {
+          setAdmin(true);
+        }
       } else {
-        console.log("no user loggeedin");
         setUser(null);
         setLoggedIn(false);
         setUid(null);
@@ -100,6 +102,7 @@ function App() {
                 setData={setData}
                 uid={uid}
                 loggedIn={loggedIn}
+                admin={admin}
               />
             }
           />

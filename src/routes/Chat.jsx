@@ -121,6 +121,7 @@ const Chat = (props) => {
                   .collection("messages")
                   .orderBy("when")
                   .onSnapshot((querysnapshot) => {
+                    //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가 
                     querysnapshot.docChanges().forEach((change) => {
                       let message = change.doc.data();
                       _messages.push(message);

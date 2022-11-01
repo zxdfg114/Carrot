@@ -20,7 +20,10 @@ const ModalLayer = (props) => {
         <p>{`고객님의 ${props.prdcTitle}이 정상적으로 등록되었습니다.`}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide} style={{ backgroundColor: "#8977ad" }}>
+        <Button
+          onClick={props.onHide}
+          style={{ backgroundColor: "dodgerblue" }}
+        >
           Close
         </Button>
       </Modal.Footer>
