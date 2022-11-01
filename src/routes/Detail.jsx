@@ -118,6 +118,8 @@ const Detail = (props) => {
               onHide={() => setModalShow(false)}
               data={data}
               id={id}
+              product={props.data}
+              setproduct={props.setData}
             />
           ) : null}
         </div>

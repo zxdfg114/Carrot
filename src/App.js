@@ -39,6 +39,7 @@ function App() {
     });
   }
 
+  //로그인시 user가 생성됨
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -52,6 +53,7 @@ function App() {
         setUser(null);
         setLoggedIn(false);
         setUid(null);
+        setAdmin(false);
       }
     });
   }, []);

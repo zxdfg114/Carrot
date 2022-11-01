@@ -41,6 +41,9 @@ export default function DeleteModal(props) {
               .then((result) => {
                 result.ref.delete();
               });
+            props.setproduct(
+              props.product.filter((x) => x.상품명 !== props.data.상품명)
+            );
             navigate("/");
           }}
         >
