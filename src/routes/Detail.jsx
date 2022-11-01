@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { db } from "../index";
+import DeleteModal from "../components/DeleteModal";
 
 const Detail = (props) => {
   //data는 이 페이지에서만 사용할 state
   const navigate = useNavigate();
   const [data, setData] = useState("");
   const { id } = useParams();
+  const [modalShow, setModalShow] = React.useState(false);
 
   async function detailData() {
     const detail = db.collection("product").doc(id).get();
@@ -16,7 +19,7 @@ const Detail = (props) => {
   }
 
   /**
-   * 상품명과 로그인된 유저를 기준으로 중복된 채팅방이 존재하는지 여부를 검사
+   * 상품명과 로그인된 유저를 기준으로 중복된 채팅방이 존재하는지 여부를 검사후 채팅방 개설.
    */
   async function checkOverlap() {
     const dbData = db
@@ -37,6 +40,7 @@ const Detail = (props) => {
           console.log("새로운 채팅방 개설 성공!");
           navigate(`/chat/${props.uid}`);
         });
+      db.collection("user");
     } else {
       console.log("이미 개설된 채팅방이 있습니다");
 
@@ -78,6 +82,7 @@ const Detail = (props) => {
                 backgroundColor: "#8977ad",
                 border: "0",
                 display: "inline-block",
+                marginRight: "10px",
               }}
               onClick={() => {
                 checkOverlap();
@@ -97,6 +102,24 @@ const Detail = (props) => {
               로그인 후 판매자와 채팅 이용이 가능합니다
             </Button>
           )}
+          {data.uid === props.uid || props.admin ? (
+            <Button
+              variant="danger"
+              onClick={() => {
+                setModalShow(true);
+              }}
+            >
+              삭제하기
+            </Button>
+          ) : null}
+          {modalShow ? (
+            <DeleteModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              data={data}
+              id={id}
+            />
+          ) : null}
         </div>
       </div>
     </>

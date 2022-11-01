@@ -1,0 +1,37 @@
+[debug] [2022-11-01T10:46:40.406Z] ----------------------------------------------------------------------
+[debug] [2022-11-01T10:46:40.408Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\zxdfg\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2022-11-01T10:46:40.409Z] CLI Version:   9.23.1
+[debug] [2022-11-01T10:46:40.409Z] Platform:      win32
+[debug] [2022-11-01T10:46:40.409Z] Node Version:  v16.17.0
+[debug] [2022-11-01T10:46:40.410Z] Time:          Tue Nov 01 2022 19:46:40 GMT+0900 (대한민국 표준시)
+[debug] [2022-11-01T10:46:40.411Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-01T10:46:40.465Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-01T10:46:40.465Z] > authorizing via signed-in user (zxdfg114@gmail.com)
+[debug] [2022-11-01T10:46:40.466Z] [iam] checking project eggplant-2cc57 for permissions ["firebase.projects.get"]
+[debug] [2022-11-01T10:46:40.468Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-11-01T10:46:40.468Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-11-01T10:46:40.702Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Tue, 01 Nov 2022 10:46:45 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-11-01T10:46:40.713Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/eggplant-2cc57:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2022-11-01T10:46:41.497Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 01 Nov 2022 10:46:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=643","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-11-01T10:46:41.498Z] > refreshing access token with scopes: []
+[debug] [2022-11-01T10:46:41.498Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-11-01T10:46:41.714Z] <<< HTTP RESPONSE 200 {"date":"Tue, 01 Nov 2022 10:46:46 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-11-01T10:46:41.729Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/eggplant-2cc57 [none]
+[debug] [2022-11-01T10:46:42.160Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/eggplant-2cc57 200
+[debug] [2022-11-01T10:46:42.160Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/eggplant-2cc57 {"projectId":"eggplant-2cc57","projectNumber":"491636354361","displayName":"eggplant","name":"projects/eggplant-2cc57","resources":{"hostingSite":"eggplant-2cc57","storageBucket":"eggplant-2cc57.appspot.com","locationId":"asia-northeast3"},"state":"ACTIVE","etag":"1_7aac938e-1587-4c95-9261-f0e74f3b67bf"}
+[info] 
+[info] === Serving from 'E:\eggplant\client'...
+[info] 
+[debug] [2022-11-01T10:46:42.164Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/eggplant-2cc57/sites 
+[debug] [2022-11-01T10:46:42.858Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/eggplant-2cc57/sites 200
+[debug] [2022-11-01T10:46:42.858Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/eggplant-2cc57/sites {"sites":[{"name":"projects/eggplant-2cc57/sites/eggplant-2cc57","defaultUrl":"https://eggplant-2cc57.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2022-11-01T10:46:42.858Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/eggplant-2cc57/webApps/-/config [none]
+[debug] [2022-11-01T10:46:43.951Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/eggplant-2cc57/webApps/-/config 200
+[debug] [2022-11-01T10:46:43.951Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/eggplant-2cc57/webApps/-/config {"projectId":"eggplant-2cc57","appId":"1:491636354361:web:2db3a26d565e5d90c00ce8","storageBucket":"eggplant-2cc57.appspot.com","locationId":"asia-northeast3","apiKey":"AIzaSyDGQ7rNazNMvFOPdafbigX7Hj6O9bCgyp8","authDomain":"eggplant-2cc57.firebaseapp.com","messagingSenderId":"491636354361"}
+[info] i  hosting: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] +  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[info] i  hosting: 127.0.0.1 - - [01/Nov/2022:10:46:53 +0000] "GET / HTTP/1.1" 200 543 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" {"metadata":{"emulator":{"name":"hosting"},"message":"127.0.0.1 - - [01/Nov/2022:10:46:53 +0000] \"GET / HTTP/1.1\" 200 543 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36\""}}
