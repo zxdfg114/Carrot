@@ -167,66 +167,68 @@
     max-width: 100%;
   }
 }
-header {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  position: fixed;
+  z-index: 500;
+  top: 0;
   display: flex;
-  background-color: #fff;
   width: 100%;
   height: 80px;
   justify-content: space-around;
   border-bottom: 1px solid #eee;
 }
-header span {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root span {
   cursor: pointer;
   color: #eee;
 }
-header .gnb {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb {
   display: flex;
   align-items: center;
   margin-bottom: 0;
   width: 50%;
 }
-header .gnb li {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li {
   display: inline-block;
   height: 100%;
   transition: all 0.5s;
 }
-header .gnb li::after {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li::after {
   content: "";
   display: block;
   height: 4px;
   width: 0%;
   transition: width 0.5s;
 }
-header .gnb li:hover {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li:hover {
   color: dodgerblue;
 }
-header .gnb li:hover::after {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li:hover::after {
   width: 100%;
   background-color: dodgerblue;
 }
-header h1 {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root h1 {
   margin: 0 5%;
   color: dodgerBlue;
   font-style: italic;
   font-family: "Permanant Marker", cursive;
   cursor: pointer;
 }
-header li {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root li {
   display: inline-block;
   padding: 10px 20px;
   cursor: pointer;
 }
-header .user {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user {
   height: 100%;
   display: flex;
   align-items: center;
   margin: 0;
   padding: 0;
 }
-header .user span {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user span {
   color: #fff;
 }
-header .user li {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user li {
   margin-left: 10px;
   padding: 5px 10px;
   background-color: transparent;
@@ -236,7 +238,7 @@ header .user li {
   opacity: 0.5;
   transition: all 0.5s;
 }
-header .user li:hover {
+header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user li:hover {
   border: 1px solid white;
   background-color: dodgerblue;
   opacity: 1;
@@ -486,7 +488,7 @@ footer small {
 }
 .container form button[type=submit]:hover,
 .chat form button[type=submit]:hover {
-  background-color: rgb(137, 119, 173);
+  background-color: blue;
 }
 .container form .form-control:focus,
 .chat form .form-control:focus {

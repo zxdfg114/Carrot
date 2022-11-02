@@ -7,7 +7,6 @@ import "firebase/firestore";
 
 export default function DeleteModal(props) {
   const navigate = useNavigate();
-  console.log(props.data);
   return (
     <Modal
       {...props}
