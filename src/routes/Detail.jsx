@@ -93,7 +93,8 @@ const Detail = (props) => {
           ) : null}
           {!props.loggedIn && (
             <Button
-              variant="primary"
+              variant="contained"
+              color="success"
               style={{ color: `#fff` }}
               onClick={() => {
                 navigate("/signin");

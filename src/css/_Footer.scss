@@ -20,6 +20,11 @@ footer {
 }
 
 @media screen and (max-width: 780px) {
+  footer {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
   footer * {
     font-size: 10px;
   }

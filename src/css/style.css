@@ -285,6 +285,10 @@ footer small {
 }
 
 @media screen and (max-width: 780px) {
+  footer {
+    flex-direction: column;
+    justify-content: space-around;
+  }
   footer * {
     font-size: 10px;
   }
@@ -420,6 +424,7 @@ footer small {
 }
 .container,
 .chat {
+  margin-top: 20%;
   width: 90%;
   margin: 20px auto;
 }
