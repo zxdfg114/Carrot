@@ -113,7 +113,10 @@ const Edit = (props) => {
           defaultValue={data.가격}
           required
         />
-        <label htmlFor="image" className="custom-file-upload">
+        <label
+          htmlFor="image"
+          className="custom-file-upload"
+        >
           사진{" "}
         </label>
         <Form.Control type="file" size="md" defaultValue={data.image} />

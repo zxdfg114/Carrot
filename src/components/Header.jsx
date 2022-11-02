@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
+import SubMenu from "./Submenu";
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ const Header = (props) => {
           </li>
         )}
       </ul>
+      <i className="fa fa-bars fa-2x"></i>
     </header>
   );
 };

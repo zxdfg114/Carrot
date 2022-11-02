@@ -30,3 +30,24 @@
   font-weight: bolder;
   padding: 2.5% 10%;
 }
+
+@media screen and (max-width: 1080px) {
+  .hero {
+    section {
+      width: 50%;
+
+      h1 {
+        font-size: 24px;
+        transform: rotate(0.04deg);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .hero {
+    section {
+      width: 80%;
+    }
+  }
+}

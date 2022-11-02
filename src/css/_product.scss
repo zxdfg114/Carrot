@@ -69,8 +69,28 @@
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 1080px) {
   .wrap {
     grid-template-columns: repeat(2, 1fr);
+
+    .product {
+      flex-direction: row;
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .trade {
+    font-size: 24px;
+  }
+
+  .wrap {
+    grid-template-columns: repeat(1, 1fr);
+
+    .product {
+      flex-direction: row;
+      border-bottom: 1px solid #eee;
+    }
   }
 }

@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/style.min.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { db } from "./index";
@@ -18,6 +17,8 @@ import Chat from "./routes/Chat";
 import OpenChat from "./components/OpenChat";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+import ButtonAppBar from "./components/NavbarTest";
+import "./css/style.min.css";
 
 function App() {
   const [data, setData] = useState([]);
@@ -64,11 +65,18 @@ function App() {
 
   return (
     <>
-      <Header
+      {/* <Header
         user={user}
         setUser={setUser}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
+      /> */}
+      <ButtonAppBar
+        user={user}
+        setUser={setUser}
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+        uid={uid}
       />
       <main>
         <Routes basename={process.env.PUBLIC_URL}>
@@ -116,7 +124,7 @@ function App() {
           />
           <Route path={"/chat/:id"} element={<Chat uid={uid} />} />
         </Routes>
-        {loggedIn && <OpenChat uid={uid} />}
+        {/* {loggedIn && <OpenChat uid={uid} />} */}
       </main>
       <Footer />
     </>
