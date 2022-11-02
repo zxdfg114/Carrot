@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../index";
 import "firebase/firestore";
 import { useQuery } from "react-query";
+import Button from "@mui/material/Button";
 
 const Chat = (props) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [active, setActive] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -84,6 +86,7 @@ const Chat = (props) => {
   useEffect(() => {
     // _messages = [];
     getData();
+    console.log(chatRoom);
   }, []);
 
   useEffect(() => {
@@ -100,7 +103,20 @@ const Chat = (props) => {
   return (
     <div className="chat">
       <div className="user-name"></div>
-
+      {chatRoom.length === 0 && (
+        <div className="no-chat-room">
+          <h2>아직 개설된 채팅방이 없습니다</h2>
+          <p>상품별 상세페이지에서 판매자와의 채팅 시작이 가능합니다.</p>
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            HOME
+          </Button>
+        </div>
+      )}
       <ul className="list-group chat-list">
         {chatRoom.map((x, i) => {
           return (
@@ -121,7 +137,7 @@ const Chat = (props) => {
                   .collection("messages")
                   .orderBy("when")
                   .onSnapshot((querysnapshot) => {
-                    //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가 
+                    //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가
                     querysnapshot.docChanges().forEach((change) => {
                       let message = change.doc.data();
                       _messages.push(message);
@@ -135,6 +151,7 @@ const Chat = (props) => {
               }}
             >
               <h6>{chatRoom[i].product}</h6>
+              <h6></h6>
               <h6 className="text-small">{chatRoom[i].id}</h6>
             </li>
           );

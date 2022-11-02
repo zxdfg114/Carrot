@@ -7,8 +7,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import SubMenu from "./Submenu";
 import firebase from "firebase/app";
@@ -51,25 +49,6 @@ export default function ButtonAppBar(props) {
           >
             FAKE
           </Typography>
-          {/* <ul className="gnb">
-            <li
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              중고거래
-            </li>
-            {props.loggedIn && (
-              <li
-                onClick={() => {
-                  navigate("/upload");
-                }}
-              >
-                올리기
-              </li>
-            )}
-
-          </ul> */}
           {/* 로그인 상태에 따라 로그인 로그아웃 변경 */}
           <ul className="user">
             {props.user === null ? null : (

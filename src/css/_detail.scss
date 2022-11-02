@@ -31,3 +31,21 @@
     border-bottom: 1px solid #eee;
   }
 }
+
+@media screen and (max-width: 780px) {
+  .detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5% 0;
+
+    &-product {
+      width: 80%;
+
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}

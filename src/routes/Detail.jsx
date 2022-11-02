@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import Button from "@mui/material/Button";
 import Modal from "react-bootstrap/Modal";
 import { db } from "../index";
 import DeleteModal from "../components/DeleteModal";
@@ -66,7 +66,7 @@ const Detail = (props) => {
           <p className="desc">{data.내용}</p>
           {data.uid === props.uid || props.admin ? (
             <Button
-              variant="primary"
+              variant="contained"
               onClick={() => {
                 navigate(`/edit/${id}`);
               }}
@@ -78,6 +78,7 @@ const Detail = (props) => {
           {/* 로그인된 유저와 게시물 작성자가 다를경우에만 + 로그인이 되어있을때에만 채팅방 만들기 보이게 설정 */}
           {data.uid !== props.uid && props.loggedIn ? (
             <Button
+              variant="contained"
               style={{
                 border: "0",
                 display: "inline-block",
@@ -103,7 +104,8 @@ const Detail = (props) => {
           )}
           {data.uid === props.uid || props.admin ? (
             <Button
-              variant="danger"
+              variant="outlined"
+              color="error"
               onClick={() => {
                 setModalShow(true);
               }}
