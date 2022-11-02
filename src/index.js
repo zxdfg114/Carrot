@@ -9,6 +9,7 @@ import "firebase/firestore";
 import "firebase/firebase-storage";
 import "firebase/firebase-auth";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
     <HashRouter>
+      <ScrollToTop />
       <App />
     </HashRouter>
   </QueryClientProvider>
