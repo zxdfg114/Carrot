@@ -7,6 +7,7 @@ import { useEffect } from "react";
 const SignIn = (props) => {
   const [fail, setFail] = useState(false);
   const [fade, setFade] = useState("");
+  const [notice, setNotice] = useState(null);
   const navigate = useNavigate();
 
   firebase.auth().onAuthStateChanged((user) => {
@@ -32,8 +33,8 @@ const SignIn = (props) => {
               navigate("/");
             })
             .catch((error) => {
-              console.error(error);
               setFail(true);
+              setNotice(error.message);
               setTimeout(() => {
                 setFade("fade-in");
               }, 100);
@@ -57,11 +58,7 @@ const SignIn = (props) => {
         >
           아직 회원이 아니신가요? - 5초만에 회원가입하기
         </small>
-        {fail && (
-          <span className={`login-failed ${fade}`}>
-            로그인에 실패하였습니다. 이메일 혹은 비밀번호를 확인해주세요
-          </span>
-        )}
+        {fail && <span className={`login-failed ${fade}`}>{notice}</span>}
         <button type="submit">로그인</button>
       </form>
     </div>

@@ -282,13 +282,17 @@ footer address {
   font-style: italic;
   margin: 0;
 }
+footer .fa-github {
+  cursor: pointer;
+  color: #fff;
+}
 footer small {
   color: #fff;
 }
 
 @media screen and (max-width: 780px) {
   footer {
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
   }
   footer * {
@@ -367,10 +371,10 @@ footer small {
   min-width: 150px;
   padding: 0 10%;
   cursor: pointer;
-  transition: all 0.3s;
+  border: 0;
 }
 .product:hover {
-  box-shadow: 1px 1px 15px #555;
+  border: 1px solid #eee;
 }
 .product .thumbnail {
   display: flex;
@@ -551,6 +555,8 @@ body {
 }
 
 main {
+  position: relative;
+  margin-top: 80px;
   width: 100%;
   min-height: 100vh;
   display: flex;

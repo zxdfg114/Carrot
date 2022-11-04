@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const SubMenu = (props) => {
   const navigate = useNavigate();
-
   return (
     <ul className="sub">
       <li
@@ -21,7 +20,7 @@ const SubMenu = (props) => {
       >
         중고 거래
       </li>
-      {props.loggedIn && (
+      {props.loggedIn ? (
         <>
           <li
             onClick={() => {
@@ -40,15 +39,15 @@ const SubMenu = (props) => {
             채팅
           </li>
         </>
+      ) : (
+        <li
+          onClick={() => {
+            navigate("/signin");
+          }}
+        >
+          로그인시 확인 가능합니다
+        </li>
       )}
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
     </ul>
   );
 };

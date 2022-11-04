@@ -6,7 +6,6 @@ import { db } from "./index";
 import "firebase/firestore";
 import firebase from "firebase/app";
 import "firebase/auth";
-import Header from "./components/Header";
 import Product from "./components/Product";
 import Upload from "./routes/Upload";
 import Signup from "./routes/Signup";
@@ -14,10 +13,9 @@ import Signin from "./routes/SignIn";
 import Detail from "./routes/Detail";
 import Edit from "./routes/Edit";
 import Chat from "./routes/Chat";
-import OpenChat from "./components/OpenChat";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-import ButtonAppBar from "./components/NavbarTest";
+import Header from "./components/Header";
 import "./css/style.min.css";
 
 function App() {
@@ -65,13 +63,7 @@ function App() {
 
   return (
     <>
-      {/* <Header
-        user={user}
-        setUser={setUser}
-        loggedIn={loggedIn}
-        setLoggedIn={setLoggedIn}
-      /> */}
-      <ButtonAppBar
+      <Header
         user={user}
         setUser={setUser}
         loggedIn={loggedIn}
@@ -124,7 +116,6 @@ function App() {
           />
           <Route path={"/chat/:id"} element={<Chat uid={uid} />} />
         </Routes>
-        {/* {loggedIn && <OpenChat uid={uid} />} */}
       </main>
       <Footer />
     </>

@@ -14,6 +14,11 @@ footer {
     margin: 0;
   }
 
+  .fa-github {
+    cursor: pointer;
+    color: #fff;
+  }
+
   small {
     color: #fff;
   }
@@ -21,7 +26,7 @@ footer {
 
 @media screen and (max-width: 780px) {
   footer {
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
   }
 

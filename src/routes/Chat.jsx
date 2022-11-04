@@ -127,25 +127,28 @@ const Chat = (props) => {
                 e.stopPropagation();
                 //클릭시마다 중첩되어 나오는 현상 방지를 위해 메시지 모음 초기화
                 setActive(i);
-                _messages = [];
                 setChatRoomId(chatRoom[i].id);
+                _messages = [];
                 /**
-                 * 채팅내용 가져오는 쿼리문
+                 * 채팅내용 가져오는 쿼리문, 현재 채팅방이 활성화되어있다면 클릭시에 중복해서 가져오지 않음
                  */
-                db.collection("chatroom")
-                  .doc(chatRoom[i].id)
-                  .collection("messages")
-                  .orderBy("when")
-                  .onSnapshot((querysnapshot) => {
-                    //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가
-                    querysnapshot.docChanges().forEach((change) => {
-                      let message = change.doc.data();
-                      _messages.push(message);
+                if (active !== i) {
+                  db.collection("chatroom")
+                    .doc(chatRoom[i].id)
+                    .collection("messages")
+                    .orderBy("when")
+                    .onSnapshot((querysnapshot) => {
+                      //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가
+                      querysnapshot.docChanges().forEach((change) => {
+                        let message = change.doc.data();
+                        _messages.push(message);
+                      });
+                      //concat을 사용해야 state re-render가 일어남
+                      //(.push)는 새로운 배열을 반환하지 않는다.
+                      setChatMessages([].concat(_messages));
+                      console.log(chatMessages);
                     });
-                    //concat을 사용해야 state re-render가 일어남
-                    setChatMessages(chatMessages.concat(_messages));
-                    console.log(chatMessages);
-                  });
+                }
                 getUserName(i);
                 scrollToBottom();
               }}
