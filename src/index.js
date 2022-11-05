@@ -9,18 +9,12 @@ import "firebase/firestore";
 import "firebase/firebase-storage";
 import "firebase/firebase-auth";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Reset } from "styled-reset";
 import ScrollToTop from "./components/ScrollToTop";
+import "./css/style.min.css";
 
 const queryClient = new QueryClient();
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDGQ7rNazNMvFOPdafbigX7Hj6O9bCgyp8",
-//   authDomain: "eggplant-2cc57.firebaseapp.com",
-//   projectId: "eggplant-2cc57",
-//   storageBucket: "eggplant-2cc57.appspot.com",
-//   messagingSenderId: "491636354361",
-//   appId: "1:491636354361:web:2db3a26d565e5d90c00ce8",
-// };
 
 const firebaseConfig = {
   apiKey: "AIzaSyBdO-irCCWskpTCMHt4Pe81RQgaRg38Z5g",

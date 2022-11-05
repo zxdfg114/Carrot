@@ -167,7 +167,7 @@
     max-width: 100%;
   }
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+header {
   position: fixed;
   z-index: 500;
   top: 0;
@@ -177,58 +177,58 @@ header.css-hip9hq-MuiPaper-root-MuiAppBar-root {
   justify-content: space-around;
   border-bottom: 1px solid #eee;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root span {
+header span {
   cursor: pointer;
   color: #eee;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb {
+header .gnb {
   display: flex;
   align-items: center;
   margin-bottom: 0;
   width: 50%;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li {
+header .gnb li {
   display: inline-block;
   height: 100%;
   transition: all 0.5s;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li::after {
+header .gnb li::after {
   content: "";
   display: block;
   height: 4px;
   width: 0%;
   transition: width 0.5s;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li:hover {
+header .gnb li:hover {
   color: dodgerblue;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .gnb li:hover::after {
+header .gnb li:hover::after {
   width: 100%;
   background-color: dodgerblue;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root h1 {
+header h1 {
   margin: 0 5%;
   color: dodgerBlue;
   font-style: italic;
   font-family: "Permanant Marker", cursive;
   cursor: pointer;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root li {
+header li {
   display: inline-block;
   padding: 10px 20px;
   cursor: pointer;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user {
+header .user {
   height: 100%;
   display: flex;
   align-items: center;
   margin: 0;
   padding: 0;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user span {
+header .user span {
   color: #fff;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user li {
+header .user li {
   margin-left: 10px;
   padding: 5px 10px;
   background-color: transparent;
@@ -238,7 +238,7 @@ header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user li {
   opacity: 0.5;
   transition: all 0.5s;
 }
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root .user li:hover {
+header .user li:hover {
   border: 1px solid white;
   background-color: dodgerblue;
   opacity: 1;
@@ -561,6 +561,10 @@ main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+ul {
+  margin: 0;
 }
 
 .clear-fix::after {

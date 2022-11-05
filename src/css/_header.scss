@@ -1,6 +1,6 @@
 $main-color: #8977ad;
 
-header.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+header {
   position: fixed;
   z-index: 500;
   top: 0;
@@ -58,7 +58,6 @@ header.css-hip9hq-MuiPaper-root-MuiAppBar-root {
   li {
     display: inline-block;
     padding: 10px 20px;
-    // color: #fff;
     cursor: pointer;
   }
 

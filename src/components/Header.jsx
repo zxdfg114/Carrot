@@ -16,10 +16,9 @@ export default function Header(props) {
   const navigate = useNavigate();
   const [sub, setSub] = useState(false);
 
-
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar>
         <Toolbar>
           <IconButton
             size="large"
