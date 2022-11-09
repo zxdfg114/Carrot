@@ -38,11 +38,20 @@ const SubMenu = (props) => {
           >
             채팅
           </li>
+          <li
+            onClick={() => {
+              navigate(`/mypost/${props.uid}`);
+              props.setSub(false);
+            }}
+          >
+            내 거래
+          </li>
         </>
       ) : (
         <li
           onClick={() => {
             navigate("/signin");
+            props.setSub(false);
           }}
         >
           로그인시 확인 가능합니다

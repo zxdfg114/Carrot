@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import SubMenu from "./Submenu";
 import firebase from "firebase/app";
@@ -67,30 +68,36 @@ export default function Header(props) {
           </ul>
           {!props.loggedIn && (
             <>
-              <span
+              {/* <span
                 className="login-required"
                 onClick={() => {
                   navigate("/signin");
                 }}
               >
                 로그인이 필요합니다
-              </span>
-              <Button
-                color="inherit"
-                onClick={() => {
-                  navigate("/signin");
-                }}
-              >
-                Login
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
-                SignUP
-              </Button>
+              </span> */}
+              <Tooltip title="로그인이 필요합니다" placement="bottom">
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    navigate("/signin");
+                    setSub(false);
+                  }}
+                >
+                  Login
+                </Button>
+              </Tooltip>
+              <Tooltip title="로그아웃" placement="bottom">
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    navigate("/signup");
+                    setSub(false);
+                  }}
+                >
+                  SignUP
+                </Button>
+              </Tooltip>
             </>
           )}
           {props.loggedIn && (
@@ -101,10 +108,12 @@ export default function Header(props) {
                   .auth()
                   .signOut()
                   .then(() => {
+                    localStorage.removeItem("watched");
                     props.setUser(null);
                   })
                   .then(() => {
                     navigate("/");
+                    setSub(false);
                   });
               }}
             >

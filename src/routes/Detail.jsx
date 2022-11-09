@@ -52,6 +52,16 @@ const Detail = (props) => {
     detailData();
   }, []);
 
+  useEffect(() => {
+    const watchedItem = JSON.parse(localStorage.getItem("watched"));
+    const set = new Set(watchedItem);
+    set.add(id);
+    const arr = Array.from(set);
+    if (props.loggedIn) {
+      localStorage.setItem("watched", JSON.stringify(arr));
+    }
+  }, []);
+
   return (
     <>
       <div className="detail">

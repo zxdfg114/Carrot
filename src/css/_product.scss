@@ -19,6 +19,19 @@
   }
 }
 
+.my-post {
+  margin-top: 30px;
+  width: 90%;
+  padding: 0 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  h1 {
+    font-weight: bold;
+  }
+}
+
 .product {
   display: flex;
   justify-content: center;
@@ -29,10 +42,6 @@
   padding: 0 10%;
   cursor: pointer;
   border: 0;
-
-  &:hover {
-    border: 1px solid #eee;
-  }
 
   .thumbnail {
     display: flex;
@@ -93,4 +102,9 @@
       border-bottom: 1px solid #eee;
     }
   }
+}
+
+.recent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }

@@ -17,6 +17,8 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Header from "./components/Header";
 import "./css/style.min.css";
+import MyPost from "./routes/MyPost";
+import Watched from "./components/watched";
 
 function App() {
   const [data, setData] = useState([]);
@@ -61,6 +63,8 @@ function App() {
     getData();
   }, []);
 
+  const watched = JSON.parse(localStorage.getItem("watched"));
+
   return (
     <>
       <Header
@@ -77,7 +81,12 @@ function App() {
             element={
               <>
                 <Hero />
-                <div className="trade">전체 매물</div>
+                {localStorage.getItem("watched") !== null ? (
+                  <Watched data={data} />
+                ) : null}
+                <div className="my-post">
+                  <h1>전체 매물</h1>
+                </div>
                 <Product data={data} setData={setData} />
               </>
             }
@@ -100,6 +109,18 @@ function App() {
             path={"/detail/:id"}
             element={
               <Detail
+                data={data}
+                setData={setData}
+                uid={uid}
+                loggedIn={loggedIn}
+                admin={admin}
+              />
+            }
+          />
+          <Route
+            path={"/mypost/:id"}
+            element={
+              <MyPost
                 data={data}
                 setData={setData}
                 uid={uid}

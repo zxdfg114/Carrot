@@ -362,6 +362,18 @@ footer small {
   max-width: 500px;
 }
 
+.my-post {
+  margin-top: 30px;
+  width: 90%;
+  padding: 0 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.my-post h1 {
+  font-weight: bold;
+}
+
 .product {
   display: flex;
   justify-content: center;
@@ -372,9 +384,6 @@ footer small {
   padding: 0 10%;
   cursor: pointer;
   border: 0;
-}
-.product:hover {
-  border: 1px solid #eee;
 }
 .product .thumbnail {
   display: flex;
@@ -428,6 +437,11 @@ footer small {
     border-bottom: 1px solid #eee;
   }
 }
+.recent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .container,
 .chat {
   margin-top: 20%;
@@ -560,6 +574,7 @@ main {
   width: 100%;
   min-height: 100vh;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 
