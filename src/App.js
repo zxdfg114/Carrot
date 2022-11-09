@@ -63,7 +63,14 @@ function App() {
     getData();
   }, []);
 
-  const watched = JSON.parse(localStorage.getItem("watched"));
+  let [watched, setWatched] = useState(
+    JSON.parse(localStorage.getItem("watched"))
+  );
+
+  useEffect(() => {
+    setWatched([].concat(JSON.parse(localStorage.getItem("watched"))));
+    console.log(watched);
+  }, []);
 
   return (
     <>
@@ -81,9 +88,7 @@ function App() {
             element={
               <>
                 <Hero />
-                {localStorage.getItem("watched") !== null ? (
-                  <Watched data={data} />
-                ) : null}
+                {watched.length !== 0 ? <Watched data={data} /> : null}
                 <div className="my-post">
                   <h1>전체 매물</h1>
                 </div>

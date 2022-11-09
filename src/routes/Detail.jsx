@@ -53,12 +53,21 @@ const Detail = (props) => {
   }, []);
 
   useEffect(() => {
-    const watchedItem = JSON.parse(localStorage.getItem("watched"));
-    const set = new Set(watchedItem);
-    set.add(id);
-    const arr = Array.from(set);
-    if (props.loggedIn) {
-      localStorage.setItem("watched", JSON.stringify(arr));
+    if (
+      props.loggedIn &&
+      JSON.parse(localStorage.getItem("watched") === null)
+    ) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    }
+    let arr = JSON.parse(localStorage.getItem("watched"));
+    if (arr) {
+      arr.unshift(id);
+      let set = new Set(arr);
+      let arr2 = Array.from(set);
+      if (arr2.length > 4) {
+        arr2.length = 4;
+      }
+      localStorage.setItem("watched", JSON.stringify(arr2));
     }
   }, []);
 

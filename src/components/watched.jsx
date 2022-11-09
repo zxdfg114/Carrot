@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Watched = (props) => {
-  let navigate = useNavigate();
-  const watchedItem = JSON.parse(localStorage.getItem("watched"));
-  const recentItem = props.data.filter((item) => watchedItem.includes(item.id));
+  const navigate = useNavigate();
+  let watched = JSON.parse(localStorage.getItem("watched"));
+  const [watchedId, setWatchedId] = useState(watched);
+  const recentItem = props.data.filter((x) => watched.includes(x.id));
 
   return (
     <>
-      <div className="my-post">
-        <h1>최근에 본 매물</h1>
-      </div>
+      {recentItem.length !== 0 ? (
+        <div className="my-post">
+          <h1>최근 본 매물</h1>
+        </div>
+      ) : null}
+
       <div className="wrap">
         {recentItem.map((x, i) => {
           return (

@@ -108,7 +108,7 @@ export default function Header(props) {
                   .auth()
                   .signOut()
                   .then(() => {
-                    localStorage.removeItem("watched");
+                    localStorage.setItem("watched", JSON.stringify([]));
                     props.setUser(null);
                   })
                   .then(() => {
