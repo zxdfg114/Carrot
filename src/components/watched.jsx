@@ -15,8 +15,8 @@ const Watched = (props) => {
         </div>
       ) : null}
 
-      <div className="wrap">
-        {recentItem.map((x, i) => {
+      <div className="wrap recent">
+        {recentItem?.map((x, i) => {
           return (
             <div
               className="product"
@@ -43,6 +43,7 @@ const Watched = (props) => {
           );
         })}
       </div>
+      <hr />
     </>
   );
 };

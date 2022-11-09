@@ -22,14 +22,35 @@
   }
 }
 
+.placeholder {
+  width: 70%;
+  background-color: transparent;
+  height: 100vh;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 30%;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1080px) {
   .sub {
     width: 50%;
+  }
+
+  .placeholder {
+    width: 50%;
+    left: 50%;
   }
 }
 
 @media screen and (max-width: 780px) {
   .sub {
     width: 70%;
+  }
+
+  .placeholder {
+    width: 30%;
+    left: 70%;
   }
 }
