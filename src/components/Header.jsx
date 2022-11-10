@@ -51,7 +51,7 @@ export default function Header(props) {
             />
           )}
           <Typography
-            variant="h2"
+            variant="h3"
             component="div"
             sx={{}}
             onClick={() => {
@@ -72,17 +72,28 @@ export default function Header(props) {
                     title={
                       props.logginedUser?.message
                         ? "새 메시지가 있습니다"
-                        : null
+                        : "채팅하기"
                     }
                     placement="bottom"
                   >
-                    <MailOutlinedIcon
-                      variant="h2"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/chat/${props.uid}`);
+                    <IconButton
+                      size="large"
+                      edge="start"
+                      color="inherit"
+                      aria-label="menu"
+                      sx={{ mr: 2 }}
+                      onClick={() => {
+                        setSub(true);
                       }}
-                    />
+                    >
+                      <MailOutlinedIcon
+                        variant="h2"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/chat/${props.uid}`);
+                        }}
+                      />
+                    </IconButton>
                   </Tooltip>
                 </Badge>
                 <Typography

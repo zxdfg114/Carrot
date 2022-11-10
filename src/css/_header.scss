@@ -69,14 +69,13 @@ header {
     padding: 0;
 
     div {
-      font-size: 18px;
+      font-size: 16px;
       text-align: right;
-      margin-right: 20px;
+      white-space: nowrap;
     }
 
     span {
       color: #fff;
-      margin-right: 20px;
     }
 
     li {
@@ -88,7 +87,6 @@ header {
       border-radius: 10px;
       opacity: 0.5;
       transition: all 0.5s;
-      margin-right: 20px;
 
       &:hover {
         border: 1px solid white;
