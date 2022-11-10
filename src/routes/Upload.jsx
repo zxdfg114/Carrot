@@ -6,6 +6,7 @@ import { db } from "../index";
 import "firebase/firestore";
 import ModalLayer from "../components/ModalLayer";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Upload = (props) => {
   const navigate = useNavigate();
@@ -86,7 +87,9 @@ const Upload = (props) => {
         <FloatingLabel controlId="floatingTextarea2" label="설명 및 요구사항">
           <Form.Control as="textarea" placeholder="Leave a comment here" />
         </FloatingLabel>
-        <button type="submit">Upload</button>
+        <Button variant="contained" color="warning" type="submit">
+          Upload
+        </Button>
       </form>
     </div>
   );

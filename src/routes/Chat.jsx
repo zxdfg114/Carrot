@@ -245,9 +245,14 @@ const Chat = (props) => {
             }}
           >
             <input type="text" className="chat-message" required />
-            <button className="chat-send" type="submit">
+            <Button
+              className="chat-send"
+              variant="contained"
+              color="warning"
+              type="submit"
+            >
               <i className="fa fa-send"></i>
-            </button>
+            </Button>
           </form>
         </div>
       )}

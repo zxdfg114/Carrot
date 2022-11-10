@@ -8,6 +8,25 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: tan;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
 }
 
 .text-small {
@@ -23,7 +42,7 @@
 }
 .mine {
   float: right;
-  background-color: skyblue;
+  background-color: #f1aa59;
   color: #fff;
 }
 
@@ -37,8 +56,8 @@
 
   .chat-send {
     width: 15%;
+    align-self: flex-start;
     margin: 0;
-
     i {
       font-size: 20px;
     }
