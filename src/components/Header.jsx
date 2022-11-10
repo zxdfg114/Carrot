@@ -64,27 +64,28 @@ export default function Header(props) {
           <div className="user">
             {props.user === null ? null : (
               <>
-                <Badge
-                  badgeContent={props.logginedUser?.message ? "!" : null}
-                  color="error"
+                <Tooltip
+                  title={
+                    props.logginedUser?.message
+                      ? "새 메시지가 있습니다"
+                      : "채팅하기"
+                  }
+                  placement="bottom"
                 >
-                  <Tooltip
-                    title={
-                      props.logginedUser?.message
-                        ? "새 메시지가 있습니다"
-                        : "채팅하기"
-                    }
-                    placement="bottom"
+                  <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    onClick={() => {
+                      setSub(true);
+                    }}
                   >
-                    <IconButton
-                      size="large"
-                      edge="start"
-                      color="inherit"
-                      aria-label="menu"
-                      sx={{ mr: 2 }}
-                      onClick={() => {
-                        setSub(true);
-                      }}
+                    {" "}
+                    <Badge
+                      badgeContent={props.logginedUser?.message ? "?" : null}
+                      color="error"
                     >
                       <MailOutlinedIcon
                         variant="h2"
@@ -93,9 +94,9 @@ export default function Header(props) {
                           navigate(`/chat/${props.uid}`);
                         }}
                       />
-                    </IconButton>
-                  </Tooltip>
-                </Badge>
+                    </Badge>
+                  </IconButton>
+                </Tooltip>
                 <Typography
                   variant="caption"
                   component="div"

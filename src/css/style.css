@@ -506,14 +506,8 @@ footer small {
   margin-top: 3%;
   color: #fff;
   cursor: pointer;
-  background-color: dodgerblue;
-  border-radius: 10px;
-  border: 0;
   transition: all 0.3s;
-}
-.container form button[type=submit]:hover,
-.chat form button[type=submit]:hover {
-  background-color: blue;
+  align-self: flex-end;
 }
 .container form .form-control:focus,
 .chat form .form-control:focus {

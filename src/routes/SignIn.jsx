@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Button from "@mui/material/Button";
 
 const SignIn = (props) => {
   const [fail, setFail] = useState(false);
@@ -59,7 +60,9 @@ const SignIn = (props) => {
           아직 회원이 아니신가요? - 5초만에 회원가입하기
         </small>
         {fail && <span className={`login-failed ${fade}`}>{notice}</span>}
-        <button type="submit">로그인</button>
+        <Button variant="contained" color="warning" type="submit">
+          로그인
+        </Button>
       </form>
     </div>
   );

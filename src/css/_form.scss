@@ -44,14 +44,8 @@
       margin-top: 3%;
       color: #fff;
       cursor: pointer;
-      background-color: dodgerblue;
-      border-radius: 10px;
-      border: 0;
       transition: all 0.3s;
-
-      &:hover {
-        background-color: blue;
-      }
+      align-self: flex-end;
     }
     .form-control:focus {
       box-shadow: 0 0 5px #8977ad;

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../index";
 import "firebase/firestore";
 import firebase from "firebase/app";
+import Button from "@mui/material/Button";
 import "firebase/auth";
 import { useState } from "react";
 
@@ -78,7 +79,9 @@ const Signup = (props) => {
           // required
         />
         {fail && <span className={`login-failed ${fade}`}>{notice}</span>}
-        <button type="submit">가입하기</button>
+        <Button variant="contained" color="warning" type="submit">
+          가입하기
+        </Button>
       </form>
     </div>
   );
