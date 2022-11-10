@@ -51,6 +51,8 @@ function App() {
       });
   }
 
+  useEffect(() => {}, []);
+
   //로그인시 user가 생성됨
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {

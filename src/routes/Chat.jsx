@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../index";
 import "firebase/firestore";
+import Badge from "@mui/material/Badge";
 import { useQuery } from "react-query";
 import Button from "@mui/material/Button";
 
@@ -59,18 +60,32 @@ const Chat = (props) => {
   /**
    * 채팅방 목록 가져오는 함수
    */
-  async function getData() {
+  function getData() {
     const dbData = db
       .collection("chatroom")
       .where("who", "array-contains", id)
-      .get();
-    const response = await dbData;
-    response.forEach((doc) => {
-      const items = doc.data();
-      items.id = doc.id;
-      _chatRoom.push(items);
-      setChatRoom(_chatRoom);
-    });
+      .onSnapshot((querysnapshot) => {
+        querysnapshot.docChanges().forEach((change) => {
+          const items = change.doc.data();
+          items.id = change.doc.id;
+          console.log(change.type);
+          if (change.type === "added") {
+            _chatRoom.push(items);
+          }
+          if (change.type === "modified") {
+            let idx = _chatRoom.findIndex((x) => x.id === items.id);
+            _chatRoom.splice(idx, 1, items);
+          }
+        });
+        setChatRoom([].concat(_chatRoom));
+      });
+    // const response = await dbData;
+    // response.forEach((doc) => {
+    //   const items = doc.data();
+    //   items.id = doc.id;
+    //   _chatRoom.push(items);
+    //   setChatRoom(_chatRoom);
+    // });
   }
 
   //채팅방 상대 유저이름 설정하는 함수
@@ -92,22 +107,16 @@ const Chat = (props) => {
     console.log("업데이트");
   }
 
-  //읽었을때 false
-  function deleteAlram(i) {
-    db.collection("user")
-      .doc(chatRoom[i].who.filter((x) => x === props.uid)[0])
-      .update({ message: false });
-    console.log("업데이트");
-  }
+  console.log(chatRoom);
 
   useEffect(() => {
-    db.collection("user").doc(props.uid).update({ message: false });
+    db.collection("user") //
+      .doc(id)
+      .update({ message: false });
   }, []);
 
   useEffect(() => {
-    // _messages = [];
     getData();
-    console.log(chatRoom);
   }, []);
 
   useEffect(() => {
@@ -141,43 +150,53 @@ const Chat = (props) => {
       <ul className="list-group chat-list">
         {chatRoom.map((x, i) => {
           return (
-            <li
-              className={`list-group-item ${handleOn(i)}`}
+            <Badge
               key={i}
-              onClick={(e) => {
-                e.stopPropagation();
-                //클릭시마다 중첩되어 나오는 현상 방지를 위해 메시지 모음 초기화
-                setActive(i);
-                setChatRoomId(chatRoom[i].id);
-                _messages = [];
-                db.collection("user").doc();
-                /**
-                 * 채팅내용 가져오는 쿼리문, 현재 채팅방이 활성화되어있다면 클릭시에 중복해서 가져오지 않음
-                 */
-                if (active !== i) {
+              badgeContent={chatRoom[i]?.new ? "!" : null}
+              color="success"
+            >
+              <li
+                className={`list-group-item ${handleOn(i)}`}
+                key={i}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  //클릭시마다 중첩되어 나오는 현상 방지를 위해 메시지 모음 초기화
+                  setActive(i);
+                  setChatRoomId(chatRoom[i].id);
+                  _messages = [];
                   db.collection("chatroom")
                     .doc(chatRoom[i].id)
-                    .collection("messages")
-                    .orderBy("when")
-                    .onSnapshot((querysnapshot) => {
-                      //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가
-                      querysnapshot.docChanges().forEach((change) => {
-                        let message = change.doc.data();
-                        _messages.push(message);
+                    .update({ new: false });
+                  /**
+                   * 채팅내용 가져오는 쿼리문, 현재 채팅방이 활성화되어있다면 클릭시에 중복해서 가져오지 않음
+                   */
+
+                  if (active !== i) {
+                    db.collection("chatroom")
+                      .doc(chatRoom[i].id)
+                      .collection("messages")
+                      .orderBy("when")
+                      .onSnapshot((querysnapshot) => {
+                        //docChanges() : 처음에 전체를 가져옴, 이후에 바뀌는 데이터만 추가
+                        querysnapshot.docChanges().forEach((change) => {
+                          let message = change.doc.data();
+                          _messages.push(message);
+                        });
+                        //concat을 사용해야 state re-render가 일어남
+                        //(.push)는 새로운 배열을 반환하지 않는다.
+
+                        setChatMessages([].concat(_messages));
                       });
-                      //concat을 사용해야 state re-render가 일어남
-                      //(.push)는 새로운 배열을 반환하지 않는다.
-                      setChatMessages([].concat(_messages));
-                    });
-                }
-                getUserName(i);
-                scrollToBottom();
-              }}
-            >
-              <h6>{chatRoom[i].product}</h6>
-              <h6></h6>
-              <h6 className="text-small">{chatRoom[i].id}</h6>
-            </li>
+                  }
+                  getUserName(i);
+                  scrollToBottom();
+                }}
+              >
+                <h6>{chatRoom[i].product}</h6>
+                <h6></h6>
+                <h6 className="text-small">{chatRoom[i].id}</h6>
+              </li>
+            </Badge>
           );
         })}
       </ul>
@@ -219,6 +238,9 @@ const Chat = (props) => {
                   setChatMessages(_messages);
                   scrollToBottom();
                 });
+              db.collection("chatroom")
+                .doc(String(chatRoomId))
+                .update({ new: true });
               postAlram(active, true);
             }}
           >
