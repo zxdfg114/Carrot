@@ -58,7 +58,7 @@ export default function Header(props) {
               navigate("/");
             }}
           >
-            FAKE
+            MARKET
           </Typography>
           {/* 로그인 상태에 따라 로그인 로그아웃 변경 */}
           <div className="user">

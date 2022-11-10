@@ -181,6 +181,7 @@ header {
   height: 80px;
   justify-content: space-around;
   border-bottom: 1px solid #eee;
+  font-family: "Noto Sans KR", "Roboto", sans-serif !important;
 }
 header span {
   cursor: pointer;
@@ -566,7 +567,6 @@ body * {
 
 html,
 body {
-  font-family: "Noto Sans KR", "Roboto", sans-serif !important;
   font-size: 16px;
 }
 
@@ -594,6 +594,10 @@ ul {
   content: "";
   display: block;
   clear: both;
+}
+
+.css-1sn4lm3-MuiTypography-root {
+  font-family: "Noto Sans KR", "Roboto", sans-serif !important;
 }
 
 .sub {
