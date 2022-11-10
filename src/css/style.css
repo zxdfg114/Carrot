@@ -575,6 +575,7 @@ body * {
 
 html,
 body {
+  font-family: "Noto Sans KR", "Roboto", sans-serif !important;
   font-size: 16px;
 }
 
