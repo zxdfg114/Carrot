@@ -5,7 +5,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import Tooltip from "@mui/material/Tooltip";
@@ -21,9 +23,14 @@ export default function Header(props) {
   const [sub, setSub] = useState(false);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar>
-        <Toolbar>
+    <>
+      <AppBar position="fixed" color="warning">
+        <Toolbar
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <IconButton
             size="large"
             edge="start"
@@ -46,7 +53,7 @@ export default function Header(props) {
           <Typography
             variant="h2"
             component="div"
-            sx={{ flexGrow: 1 }}
+            sx={{}}
             onClick={() => {
               navigate("/");
             }}
@@ -54,12 +61,12 @@ export default function Header(props) {
             FAKE
           </Typography>
           {/* 로그인 상태에 따라 로그인 로그아웃 변경 */}
-          <ul className="user">
+          <div className="user">
             {props.user === null ? null : (
               <>
                 <Badge
                   badgeContent={props.logginedUser?.message ? "!" : null}
-                  color="success"
+                  color="error"
                 >
                   <Tooltip
                     title={
@@ -79,9 +86,8 @@ export default function Header(props) {
                   </Tooltip>
                 </Badge>
                 <Typography
-                  variant="h7"
+                  variant="caption"
                   component="div"
-                  sx={{ flexGrow: 1 }}
                   onClick={() => {
                     navigate("/");
                   }}
@@ -91,65 +97,58 @@ export default function Header(props) {
                 </Typography>
               </>
             )}
-          </ul>
-          {!props.loggedIn && (
-            <>
-              {/* <span
-                className="login-required"
-                onClick={() => {
-                  navigate("/signin");
-                }}
-              >
-                로그인이 필요합니다
-              </span> */}
-              <Tooltip title="로그인이 필요합니다" placement="bottom">
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    navigate("/signin");
-                    setSub(false);
-                  }}
-                >
-                  Login
-                </Button>
-              </Tooltip>
-              <Tooltip title="회원가입" placement="bottom">
-                <Button
-                  color="inherit"
-                  onClick={() => {
-                    navigate("/signup");
-                    setSub(false);
-                  }}
-                >
-                  SignUP
-                </Button>
-              </Tooltip>
-            </>
-          )}
-          {props.loggedIn && (
-            <Tooltip title="로그아웃" placement="bottom">
-              <Button
-                color="inherit"
-                onClick={() => {
-                  firebase
-                    .auth()
-                    .signOut()
-                    .then(() => {
-                      localStorage.setItem("watched", JSON.stringify([]));
-                      props.setUser(null);
-                    })
-                    .then(() => {
-                      navigate("/");
+
+            {!props.loggedIn && (
+              <>
+                <Tooltip title="로그인이 필요합니다" placement="bottom">
+                  <Button
+                    color="inherit"
+                    onClick={() => {
+                      navigate("/signin");
                       setSub(false);
-                    });
-                }}
-              >
-                LogOUT
-              </Button>
-            </Tooltip>
-          )}
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Tooltip>
+                <Tooltip title="회원가입" placement="bottom">
+                  <Button
+                    color="inherit"
+                    onClick={() => {
+                      navigate("/signup");
+                      setSub(false);
+                    }}
+                  >
+                    SignUP
+                  </Button>
+                </Tooltip>
+              </>
+            )}
+            {props.loggedIn && (
+              <Tooltip title="로그아웃" placement="bottom">
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    firebase
+                      .auth()
+                      .signOut()
+                      .then(() => {
+                        localStorage.setItem("watched", JSON.stringify([]));
+                        props.setUser(null);
+                      })
+                      .then(() => {
+                        navigate("/");
+                        setSub(false);
+                      });
+                  }}
+                >
+                  LogOUT
+                </Button>
+              </Tooltip>
+            )}
+          </div>
         </Toolbar>
       </AppBar>
-    </Box>
+    </>
   );
 }

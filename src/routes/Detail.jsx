@@ -9,6 +9,7 @@ const Detail = (props) => {
   //data는 이 페이지에서만 사용할 state
   const navigate = useNavigate();
   const [data, setData] = useState("");
+  const [fade, setFade] = useState("");
   const { id } = useParams();
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -53,6 +54,12 @@ const Detail = (props) => {
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      setFade("fadein");
+    }, 100);
+  }, [fade]);
+
+  useEffect(() => {
     if (
       props.loggedIn &&
       JSON.parse(localStorage.getItem("watched") === null)
@@ -74,7 +81,7 @@ const Detail = (props) => {
   return (
     <>
       <div className="detail">
-        <div className="detail-product">
+        <div className={`detail-product ${fade}`}>
           <h5 className="title">{data.상품명}</h5>
           <h5>{data.작성자}</h5>
           <p className="date">{data.날짜}</p>

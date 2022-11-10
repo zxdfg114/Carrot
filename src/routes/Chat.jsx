@@ -153,7 +153,7 @@ const Chat = (props) => {
             <Badge
               key={i}
               badgeContent={chatRoom[i]?.new ? "!" : null}
-              color="success"
+              color="error"
             >
               <li
                 className={`list-group-item ${handleOn(i)}`}

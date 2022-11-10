@@ -7,10 +7,16 @@
 
   &-product {
     width: 40%;
+    opacity: 0;
+    transition: all 0.5s;
 
     img {
       max-width: 100%;
     }
+  }
+
+  &-product.fadein {
+    opacity: 1;
   }
 
   .title {

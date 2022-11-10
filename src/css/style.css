@@ -132,9 +132,14 @@
 }
 .detail-product {
   width: 40%;
+  opacity: 0;
+  transition: all 0.5s;
 }
 .detail-product img {
   max-width: 100%;
+}
+.detail-product.fadein {
+  opacity: 1;
 }
 .detail .title {
   font-size: 2rem;
@@ -219,7 +224,6 @@ header li {
   cursor: pointer;
 }
 header .user {
-  width: 30%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -228,11 +232,13 @@ header .user {
   padding: 0;
 }
 header .user div {
-  width: 30%;
+  font-size: 18px;
   text-align: right;
+  margin-right: 20px;
 }
 header .user span {
   color: #fff;
+  margin-right: 20px;
 }
 header .user li {
   margin-left: 10px;
@@ -243,6 +249,7 @@ header .user li {
   border-radius: 10px;
   opacity: 0.5;
   transition: all 0.5s;
+  margin-right: 20px;
 }
 header .user li:hover {
   border: 1px solid white;
