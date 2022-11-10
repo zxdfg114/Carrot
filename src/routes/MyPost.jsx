@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Modal from "react-bootstrap/Modal";
 
 import DeleteModal from "../components/DeleteModal";
+import Upload from "./Upload";
 
 const MyPost = (props) => {
   let { id } = useParams();
@@ -16,6 +17,20 @@ const MyPost = (props) => {
       <div className="my-post">
         <h1>내 거래</h1>
       </div>
+      {myData.length === 0 && (
+        <div className="no-upload">
+          <h1>아직 업로드한 상품이 없습니다</h1>
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() => {
+              navigate("/upload");
+            }}
+          >
+            중고매물 올리기
+          </Button>
+        </div>
+      )}
       <div className="wrap">
         {myData.map((x, i) => {
           return (
