@@ -62,11 +62,18 @@ header {
   }
 
   .user {
+    width: 30%;
     height: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin: 0;
     padding: 0;
+
+    div {
+      width: 30%;
+      text-align: right;
+    }
 
     span {
       color: #fff;

@@ -21,8 +21,11 @@ import MyPost from "./routes/MyPost";
 import Watched from "./components/watched";
 
 function App() {
+  const arr = JSON.parse(localStorage.getItem("watched"));
+  arr ?? localStorage.setItem("watched", JSON.stringify([]));
   const [data, setData] = useState([]);
   const [user, setUser] = useState(null);
+  const [logginedUser, setLogginedUser] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [uid, setUid] = useState(null);
@@ -39,6 +42,14 @@ function App() {
       setData(_data);
     });
   }
+  function getUser(uid) {
+    db.collection("user")
+      .doc(uid)
+      .onSnapshot((doc) => {
+        let userData = doc.data();
+        setLogginedUser(userData);
+      });
+  }
 
   //로그인시 user가 생성됨
   useEffect(() => {
@@ -47,6 +58,7 @@ function App() {
         setLoggedIn(true);
         setUser(user.displayName);
         setUid(user.uid);
+        getUser(user.uid);
         if (user.email === "chat3@gmail.com") {
           setAdmin(true);
         }
@@ -57,6 +69,7 @@ function App() {
         setAdmin(false);
       }
     });
+    console.log(logginedUser);
   }, []);
 
   useEffect(() => {
@@ -79,6 +92,7 @@ function App() {
         setUser={setUser}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
+        logginedUser={logginedUser}
         uid={uid}
       />
       <main>
@@ -140,7 +154,10 @@ function App() {
               <Edit data={data} setData={setData} uid={uid} user={user} />
             }
           />
-          <Route path={"/chat/:id"} element={<Chat uid={uid} />} />
+          <Route
+            path={"/chat/:id"}
+            element={<Chat uid={uid} logginedUser={logginedUser} />}
+          />
         </Routes>
       </main>
       <Footer />

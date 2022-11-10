@@ -7,10 +7,13 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import SubMenu from "./Submenu";
 import firebase from "firebase/app";
+import Badge from "@mui/material/Badge";
+import Stack from "@mui/material/Stack";
 import "firebase/auth";
 
 export default function Header(props) {
@@ -53,17 +56,40 @@ export default function Header(props) {
           {/* 로그인 상태에 따라 로그인 로그아웃 변경 */}
           <ul className="user">
             {props.user === null ? null : (
-              <Typography
-                variant="h7"
-                component="div"
-                sx={{ flexGrow: 1 }}
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                <AccountCircle />
-                {`${props.user}`}
-              </Typography>
+              <>
+                <Badge
+                  badgeContent={props.logginedUser?.message ? "!" : null}
+                  color="success"
+                >
+                  <Tooltip
+                    title={
+                      props.logginedUser?.message
+                        ? "새 메시지가 있습니다"
+                        : null
+                    }
+                    placement="bottom"
+                  >
+                    <MailOutlinedIcon
+                      variant="h2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/chat/${props.uid}`);
+                      }}
+                    />
+                  </Tooltip>
+                </Badge>
+                <Typography
+                  variant="h7"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  <AccountCircle />
+                  {`${props.user}`}
+                </Typography>
+              </>
             )}
           </ul>
           {!props.loggedIn && (
@@ -87,7 +113,7 @@ export default function Header(props) {
                   Login
                 </Button>
               </Tooltip>
-              <Tooltip title="로그아웃" placement="bottom">
+              <Tooltip title="회원가입" placement="bottom">
                 <Button
                   color="inherit"
                   onClick={() => {
@@ -101,24 +127,26 @@ export default function Header(props) {
             </>
           )}
           {props.loggedIn && (
-            <Button
-              color="inherit"
-              onClick={() => {
-                firebase
-                  .auth()
-                  .signOut()
-                  .then(() => {
-                    localStorage.setItem("watched", JSON.stringify([]));
-                    props.setUser(null);
-                  })
-                  .then(() => {
-                    navigate("/");
-                    setSub(false);
-                  });
-              }}
-            >
-              LogOUT
-            </Button>
+            <Tooltip title="로그아웃" placement="bottom">
+              <Button
+                color="inherit"
+                onClick={() => {
+                  firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                      localStorage.setItem("watched", JSON.stringify([]));
+                      props.setUser(null);
+                    })
+                    .then(() => {
+                      navigate("/");
+                      setSub(false);
+                    });
+                }}
+              >
+                LogOUT
+              </Button>
+            </Tooltip>
           )}
         </Toolbar>
       </AppBar>

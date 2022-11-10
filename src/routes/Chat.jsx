@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 const Chat = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
+  //현재 활성화된 채팅방의 index
   const [active, setActive] = useState(null);
   const [userName, setUserName] = useState(null);
 
@@ -83,6 +84,26 @@ const Chat = (props) => {
     setUserName(name);
   }
 
+  //새 메시지 생성시 알림 기능 생성
+  function postAlram(i, bool) {
+    db.collection("user")
+      .doc(chatRoom[i].who.filter((x) => x !== props.uid)[0])
+      .update({ message: bool });
+    console.log("업데이트");
+  }
+
+  //읽었을때 false
+  function deleteAlram(i) {
+    db.collection("user")
+      .doc(chatRoom[i].who.filter((x) => x === props.uid)[0])
+      .update({ message: false });
+    console.log("업데이트");
+  }
+
+  useEffect(() => {
+    db.collection("user").doc(props.uid).update({ message: false });
+  }, []);
+
   useEffect(() => {
     // _messages = [];
     getData();
@@ -129,6 +150,7 @@ const Chat = (props) => {
                 setActive(i);
                 setChatRoomId(chatRoom[i].id);
                 _messages = [];
+                db.collection("user").doc();
                 /**
                  * 채팅내용 가져오는 쿼리문, 현재 채팅방이 활성화되어있다면 클릭시에 중복해서 가져오지 않음
                  */
@@ -146,7 +168,6 @@ const Chat = (props) => {
                       //concat을 사용해야 state re-render가 일어남
                       //(.push)는 새로운 배열을 반환하지 않는다.
                       setChatMessages([].concat(_messages));
-                      console.log(chatMessages);
                     });
                 }
                 getUserName(i);
@@ -198,6 +219,7 @@ const Chat = (props) => {
                   setChatMessages(_messages);
                   scrollToBottom();
                 });
+              postAlram(active, true);
             }}
           >
             <input type="text" className="chat-message" required />

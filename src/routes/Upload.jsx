@@ -13,7 +13,7 @@ const Upload = (props) => {
   const [prdcTitle, setPrdcTitle] = useState(" ");
   let modalTitle = `상품 등록 완료!`;
   let modalContent = `상품이 정상적으로 등록되었습니다`;
-  console.log(props.user)
+  console.log(props.user);
 
   return (
     <div className="container">
