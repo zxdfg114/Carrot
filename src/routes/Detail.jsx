@@ -16,12 +16,13 @@ const Detail = (props) => {
   const { id } = useParams();
   const [modalShow, setModalShow] = React.useState(false);
 
-  console.log(data);
+  const idx = props.data.findIndex((x) => x.id === id);
 
   async function detailData() {
     const detail = db.collection("product").doc(id).get();
     const result = await detail;
-    setData(result.data());
+    let item = result.data();
+    setData(item);
   }
 
   /**
@@ -141,7 +142,8 @@ const Detail = (props) => {
           <h5>{data.작성자}</h5>
           <p className="date">{data.날짜}</p>
           <p className="like">
-            <i className="fa fa-heart-o">{data.likeCount}</i>
+            <i className="fa fa-heart-o"></i>
+            <span>{props.data[idx]?.likeCount}</span>
           </p>
           <hr />
           <img src={data.image} alt="" />

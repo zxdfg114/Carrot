@@ -172,6 +172,10 @@
   min-height: 150px;
   border-bottom: 1px solid #eee;
 }
+.detail .like i {
+  color: crimson;
+  margin-right: 10px;
+}
 
 @media screen and (max-width: 780px) {
   .detail {
