@@ -443,6 +443,9 @@ footer small {
 .product .price {
   font-weight: bold;
 }
+.product .like i {
+  color: crimson;
+}
 
 .no-upload {
   padding-top: 10%;

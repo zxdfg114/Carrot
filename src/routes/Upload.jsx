@@ -65,7 +65,7 @@ const Upload = (props) => {
                     //상세페이지 제어를 위해 아이디를 저장
                     const id = doc.id;
                     itemData.id = id;
-                    props.data.push(itemData);
+                    props.data.unshift(itemData);
                     props.setData(props.data);
                     setModalShow(1);
                     setPrdcTitle(e.target[0].value);

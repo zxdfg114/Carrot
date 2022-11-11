@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Watched = (props) => {
   const navigate = useNavigate();
   let watched = JSON.parse(localStorage.getItem("watched"));
-  const [watchedId, setWatchedId] = useState(watched);
-  const recentItem = props.data.filter((x) => watched.includes(x.id));
+  let [watchedId, setWatchedId] = useState(watched);
+  const recentItem = props.data.filter((x) => watchedId.includes(x.id));
+  useEffect(()=>{
+    setWatchedId(watched);
+    console.log(watchedId);
+  }, [])
 
   return (
     <>

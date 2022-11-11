@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -31,27 +30,35 @@ function App() {
   const [uid, setUid] = useState(null);
   // data state는 배열이라서 !
   const _data = [...data];
-  //상품정보 가져오는 함수
+  //상품정보 가져오는 함수, subCollection 가져오기, 비동기 함수의 실행시점 조정하기
   async function getData() {
     const dbData = db.collection("product").orderBy("날짜", "desc").get();
     const result = await dbData;
     result.forEach((doc) => {
-      const items = doc.data();
+      let items = doc.data();
       items.id = doc.id;
-      _data.push(items);
-      setData(_data);
+      doc.ref
+        .collection("like")
+        .get()
+        .then((doc) => {
+          items.likeCount = doc.size;
+        }) //이게 완료되면 밑에 실행함
+        .then(() => {
+          _data.push(items);
+          setData([].concat(_data));
+        });
     });
   }
-  function getUser(uid) {
+  console.log(data);
+  //유저 정보 가져와서 state에 저장하는 함수, onSnapShot는 비동기처리 x
+  const getUser = (uid) => {
     db.collection("user")
       .doc(uid)
       .onSnapshot((doc) => {
         let userData = doc.data();
         setLogginedUser(userData);
       });
-  }
-
-  useEffect(() => {}, []);
+  };
 
   //로그인시 user가 생성됨
   useEffect(() => {
@@ -71,7 +78,6 @@ function App() {
         setAdmin(false);
       }
     });
-    console.log(logginedUser);
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import { db } from "../index";
+import { db } from "../index";
 import "firebase/firestore";
+import { Button } from "@mui/material";
 
 const Product = (props) => {
   const navigate = useNavigate();
@@ -27,10 +28,12 @@ const Product = (props) => {
               <div className="description">
                 <h5 className="title">{props.data[i].상품명}</h5>
                 <p className="date">{props.data[i].날짜.toLocaleString()}</p>
+                <p className="like">
+                  <i className="fa fa-heart-o"></i> {props.data[i].likeCount}
+                </p>
                 <p className="price">
                   {parseInt(props.data[i].가격).toLocaleString()}원
                 </p>
-                <p></p>
               </div>
             </div>
           );
