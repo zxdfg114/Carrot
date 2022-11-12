@@ -42,15 +42,15 @@ function App() {
         .get()
         .then((doc) => {
           items.likeCount = doc.size;
-        }) //이게 완료되면 밑에 실행함
+        })
         .then(() => {
           _data.push(items);
           setData([].concat(_data));
-        });
+        }); //이게 완료되면 밑에 실행함
     });
   }
   console.log(data);
-  //유저 정보 가져와서 state에 저장하는 함수, onSnapShot는 비동기처리 x
+  //유저 정보 가져와서 state에 저장하는 함수, onSnapShot은 비동기함수 x
   const getUser = (uid) => {
     db.collection("user")
       .doc(uid)

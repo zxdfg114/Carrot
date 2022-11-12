@@ -17,14 +17,19 @@ const Detail = (props) => {
   const [modalShow, setModalShow] = React.useState(false);
 
   const idx = props.data.findIndex((x) => x.id === id);
+  const [likeNum, setLikeNum] = useState(parseInt(props.data[idx]?.likeCount));
 
   async function detailData() {
     const detail = db.collection("product").doc(id).get();
     const result = await detail;
     let item = result.data();
-    setData(item);
+    result.ref.collection("like").onSnapshot((doc) => {
+      item.likeCount = doc.size;
+      setData(item);
+    });
   }
 
+  console.log(data);
   /**
    * 상품명과 로그인된 유저를 기준으로 중복된 채팅방이 존재하는지 여부를 검사후 채팅방 개설.
    */
@@ -143,7 +148,7 @@ const Detail = (props) => {
           <p className="date">{data.날짜}</p>
           <p className="like">
             <i className="fa fa-heart-o"></i>
-            <span>{props.data[idx]?.likeCount}</span>
+            <span>{data.likeCount}</span>
           </p>
           <hr />
           <img src={data.image} alt="" />
