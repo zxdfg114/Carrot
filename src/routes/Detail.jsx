@@ -12,13 +12,10 @@ const Detail = (props) => {
   const [data, setData] = useState("");
   const [fade, setFade] = useState("");
   const [liked, setLiked] = useState(false);
-  const [success, setSuccess] = useState(null);
   const { id } = useParams();
   const [modalShow, setModalShow] = React.useState(false);
 
-  const idx = props.data.findIndex((x) => x.id === id);
-  const [likeNum, setLikeNum] = useState(parseInt(props.data[idx]?.likeCount));
-
+  //컴포넌트 로딩시 데이터 받아옴
   async function detailData() {
     const detail = db.collection("product").doc(id).get();
     const result = await detail;
@@ -28,8 +25,6 @@ const Detail = (props) => {
       setData(item);
     });
   }
-
-  console.log(data);
   /**
    * 상품명과 로그인된 유저를 기준으로 중복된 채팅방이 존재하는지 여부를 검사후 채팅방 개설.
    */
@@ -75,6 +70,8 @@ const Detail = (props) => {
         .doc(props.uid)
         .set({ like: props.uid })
         .then((doc) => {
+          console.log(doc);
+          detailData(); // 추가시 데이터 다시 받아옴
           setLiked(true);
         });
     } else {
@@ -85,9 +82,11 @@ const Detail = (props) => {
         .get()
         .then((doc) => {
           doc.ref.delete();
+        })
+        .then(() => {
+          detailData(); // 삭제후 데이터 다시 받아옴
+          setLiked(false);
         });
-
-      setLiked(false);
     }
   }
   //컴포넌트 로딩후 이 상품에 좋아요를 눌렀었는지 검사
@@ -168,7 +167,7 @@ const Detail = (props) => {
             </Button>
           ) : null}
           {liked && (
-            <Alert severity="success">관심목록에 등록되었습니다 !</Alert>
+            <Alert severity="success"> 관심목록에 등록되었습니다 ! </Alert>
           )}
 
           {/* 로그인된 유저와 게시물 작성자가 다를경우에만 + 로그인이 되어있을때에만 채팅방 만들기 보이게 설정*/}

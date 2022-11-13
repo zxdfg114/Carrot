@@ -24,23 +24,34 @@ function App() {
   arr ?? localStorage.setItem("watched", JSON.stringify([]));
   const [data, setData] = useState([]);
   const [user, setUser] = useState(null);
+  const [likeCount, setLikeCount] = useState(null);
   const [logginedUser, setLogginedUser] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [uid, setUid] = useState(null);
   // data state는 배열이라서 !
   const _data = [...data];
+
   //상품정보 가져오는 함수, subCollection 가져오기, 비동기 함수의 실행시점 조정하기
   async function getData() {
     const dbData = db.collection("product").orderBy("날짜", "desc").get();
     const result = await dbData;
     result.forEach((doc) => {
       let items = doc.data();
-      items.id = doc.id;
-      doc.ref.collection("like").onSnapshot((doc) => {
-        items.likeCount = doc.size;
-        _data.push(items);
-        setData([].concat(_data));
+      // 처음 데이터를 가져올때는 get으로 가져옴, 첫 실행 이후에 리스너를 부착하여 실시간으로 반영
+      doc.ref
+        .collection("like")
+        .get()
+        .then((snapshot) => {
+          items.likeCount = snapshot.size;
+        })
+        .then(() => {
+          items.id = doc.id;
+          _data.push(items);
+          setData([].concat(_data));
+        });
+      doc.ref.collection("like").onSnapshot((snapshot) => {
+        items.likeCount = snapshot.size;
       });
     });
   }
