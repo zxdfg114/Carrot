@@ -25,8 +25,9 @@ function App() {
   const arr = JSON.parse(localStorage.getItem("watched"));
   arr ?? localStorage.setItem("watched", JSON.stringify([]));
   const [data, setData] = useState([]);
+
   const [user, setUser] = useState(null);
-  const [likeCount, setLikeCount] = useState(null);
+
   const [logginedUser, setLogginedUser] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -117,7 +118,7 @@ function App() {
             element={
               <>
                 <Hero />
-                {<HotItems data={data} />}
+                <HotItems data={data} />
                 {watched.length !== 0 ? <Watched data={data} /> : null}
                 <div className="my-post">
                   <h1>전체 매물</h1>
