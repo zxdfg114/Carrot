@@ -10,8 +10,8 @@ import Upload from "./Upload";
 const MyInterest = (props) => {
   const [data, setData] = useState([]);
   const _data = [...data];
-  let { id } = useParams();
-  let navigate = useNavigate();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   //내가 좋아요를 눌렀던 상품을 db에서 가져옴
   async function getData() {
@@ -23,7 +23,7 @@ const MyInterest = (props) => {
       const likeResult = await like;
       likeResult.forEach((x) => {
         items.id = doc.id;
-        let didIliked = x.data().like;
+        const didIliked = x.data().like;
         if (id === didIliked) {
           items.likeCount = likeResult.size;
           _data.push(items);

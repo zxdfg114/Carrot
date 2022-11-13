@@ -53,7 +53,7 @@ const SubMenu = (props) => {
                 props.setSub(false);
               }}
             >
-              관심상품
+              관심 상품
             </li>
           </>
         ) : (
