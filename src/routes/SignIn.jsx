@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import Button from "@mui/material/Button";
 
 const SignIn = (props) => {

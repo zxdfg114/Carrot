@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition, useMemo, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { db } from "./index";
 import "firebase/firestore";
@@ -35,6 +35,7 @@ function App() {
   // data state는 배열이라서 !
   const _data = [...data];
 
+  let [isPending, startTransition] = useTransition();
   //상품정보 가져오는 함수, subCollection 가져오기, 비동기 함수의 실행시점 조정하기
   async function getData() {
     const dbData = db.collection("product").orderBy("날짜", "desc").get();
@@ -51,7 +52,10 @@ function App() {
         .then(() => {
           items.id = doc.id;
           _data.push(items);
-          setData([].concat(_data));
+          //문제의 state 변경을 조금 늦게 처리하여 성능개선
+          startTransition(() => {
+            setData([].concat(_data));
+          });
         });
       doc.ref.collection("like").onSnapshot((snapshot) => {
         items.likeCount = snapshot.size;
@@ -89,8 +93,8 @@ function App() {
     });
   }, []);
 
-  useEffect(() => {
-    getData();
+  useMemo(() => {
+    return getData();
   }, []);
 
   let [watched, setWatched] = useState(
@@ -112,82 +116,84 @@ function App() {
         uid={uid}
       />
       <main>
-        <Routes basename={process.env.PUBLIC_URL}>
-          <Route
-            path={"/"}
-            element={
-              <>
-                <Hero />
-                <HotItems data={data} />
-                {watched.length !== 0 ? <Watched data={data} /> : null}
-                <div className="my-post">
-                  <h1>전체 매물</h1>
-                </div>
-                <Product data={data} setData={setData} />
-              </>
-            }
-          />
-          <Route
-            path={"/upload"}
-            element={
-              <Upload data={data} setData={setData} uid={uid} user={user} />
-            }
-          />
-          <Route
-            path={"/signup"}
-            element={<Signup user={user} setUser={setUser} />}
-          />
-          <Route
-            path={"/signin"}
-            element={<Signin user={user} setUser={setUser} />}
-          />
-          <Route
-            path={"/detail/:id"}
-            element={
-              <Detail
-                data={data}
-                setData={setData}
-                uid={uid}
-                loggedIn={loggedIn}
-                admin={admin}
-              />
-            }
-          />
-          <Route
-            path={"/mypost/:id"}
-            element={
-              <MyPost
-                data={data}
-                setData={setData}
-                uid={uid}
-                loggedIn={loggedIn}
-                admin={admin}
-              />
-            }
-          />
-          <Route
-            path={"/edit/:product"}
-            element={
-              <Edit data={data} setData={setData} uid={uid} user={user} />
-            }
-          />
-          <Route
-            path={"/chat/:id"}
-            element={<Chat uid={uid} logginedUser={logginedUser} />}
-          />
-          <Route
-            path={"/liked/:id"}
-            element={
-              <MyInterest
-                data={data}
-                setData={setData}
-                uid={uid}
-                loggedIn={loggedIn}
-                admin={admin}
-              />
-            }
-          />
-        </Routes>
+        <Suspense>
+          <Routes basename={process.env.PUBLIC_URL}>
+            <Route
+              path={"/"}
+              element={
+                <>
+                  <Hero />
+                  <HotItems data={data} />
+                  {watched.length !== 0 ? <Watched data={data} /> : null}
+                  <div className="my-post">
+                    <h1>전체 매물</h1>
+                  </div>
+                  <Product data={data} setData={setData} />
+                </>
+              }
+            />
+            <Route
+              path={"/upload"}
+              element={
+                <Upload data={data} setData={setData} uid={uid} user={user} />
+              }
+            />
+            <Route
+              path={"/signup"}
+              element={<Signup user={user} setUser={setUser} />}
+            />
+            <Route
+              path={"/signin"}
+              element={<Signin user={user} setUser={setUser} />}
+            />
+            <Route
+              path={"/detail/:id"}
+              element={
+                <Detail
+                  data={data}
+                  setData={setData}
+                  uid={uid}
+                  loggedIn={loggedIn}
+                  admin={admin}
+                />
+              }
+            />
+            <Route
+              path={"/mypost/:id"}
+              element={
+                <MyPost
+                  data={data}
+                  setData={setData}
+                  uid={uid}
+                  loggedIn={loggedIn}
+                  admin={admin}
+                />
+              }
+            />
+            <Route
+              path={"/edit/:product"}
+              element={
+                <Edit data={data} setData={setData} uid={uid} user={user} />
+              }
+            />
+            <Route
+              path={"/chat/:id"}
+              element={<Chat uid={uid} logginedUser={logginedUser} />}
+            />
+            <Route
+              path={"/liked/:id"}
+              element={
+                <MyInterest
+                  data={data}
+                  setData={setData}
+                  uid={uid}
+                  loggedIn={loggedIn}
+                  admin={admin}
+                />
+              }
+            />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </>

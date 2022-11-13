@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../index";
 import Button from "@mui/material/Button";
-import Modal from "react-bootstrap/Modal";
 
-import DeleteModal from "../components/DeleteModal";
-import Upload from "./Upload";
 
 const MyInterest = (props) => {
   const [data, setData] = useState([]);

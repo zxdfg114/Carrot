@@ -14,8 +14,6 @@ const Edit = (props) => {
   //이 페이지 내에서만 사용할 하나의 doc
   const [data, setData] = useState("");
   const { product } = useParams();
-  const dataCopied = [...props.data];
-
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(0);
   const [prdcTitle, setPrdcTitle] = useState(" ");

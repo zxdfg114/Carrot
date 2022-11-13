@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../index";
 import "firebase/firestore";
-import { Button } from "@mui/material";
+
 
 const Product = (props) => {
   const navigate = useNavigate();

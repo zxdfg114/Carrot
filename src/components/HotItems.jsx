@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useDeferredValue } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../index";
 import "firebase/firestore";
 
 const HotItems = (props) => {
@@ -11,6 +10,8 @@ const HotItems = (props) => {
       return b.likeCount - a.likeCount;
     })
     .slice(0, 8);
+
+  useDeferredValue(props.data);
 
   return (
     <>

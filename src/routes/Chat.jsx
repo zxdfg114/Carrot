@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../index";
 import "firebase/firestore";
 import Badge from "@mui/material/Badge";
-import { useQuery } from "react-query";
 import Button from "@mui/material/Button";
 
 const Chat = (props) => {
@@ -22,12 +21,7 @@ const Chat = (props) => {
   let [chatRoomId, setChatRoomId] = useState(null);
   // props.uid === 현재 로그인중인 유저의 uid
   let [chatMessages, setChatMessages] = useState([]);
-  let _messages = [...chatMessages];
-  const messageQuery = db
-    .collection("chatroom")
-    .doc()
-    .collection("messages")
-    .orderBy("when");
+  let _messages = [...chatMessages];;
 
   const chatContents = useRef();
 

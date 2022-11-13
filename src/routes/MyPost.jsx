@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { db } from "../index";
-import Button from "@mui/material/Button";
-import Modal from "react-bootstrap/Modal";
 
-import DeleteModal from "../components/DeleteModal";
-import Upload from "./Upload";
+import Button from "@mui/material/Button";
 
 const MyPost = (props) => {
   let { id } = useParams();
