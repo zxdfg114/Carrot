@@ -18,6 +18,8 @@ import Header from "./components/Header";
 import "./css/style.min.css";
 import MyPost from "./routes/MyPost";
 import Watched from "./components/watched";
+import HotItems from "./components/HotItems";
+import MyInterest from "./routes/MyInterest";
 
 function App() {
   const arr = JSON.parse(localStorage.getItem("watched"));
@@ -38,7 +40,7 @@ function App() {
     const result = await dbData;
     result.forEach((doc) => {
       let items = doc.data();
-      // 처음 데이터를 가져올때는 get으로 가져옴, 첫 실행 이후에 리스너를 부착하여 실시간으로 반영
+      // 처음 좋아요 데이터를 가져올때는 get으로 가져옴, 첫 실행 이후에 리스너를 부착하여 실시간으로 반영
       doc.ref
         .collection("like")
         .get()
@@ -55,7 +57,7 @@ function App() {
       });
     });
   }
-  console.log(data);
+
   //유저 정보 가져와서 state에 저장하는 함수, onSnapShot은 비동기함수 x
   const getUser = (uid) => {
     db.collection("user")
@@ -96,7 +98,6 @@ function App() {
 
   useEffect(() => {
     setWatched([].concat(JSON.parse(localStorage.getItem("watched"))));
-    console.log(watched);
   }, []);
 
   return (
@@ -116,6 +117,7 @@ function App() {
             element={
               <>
                 <Hero />
+                {<HotItems data={data} />}
                 {watched.length !== 0 ? <Watched data={data} /> : null}
                 <div className="my-post">
                   <h1>전체 매물</h1>
@@ -171,6 +173,18 @@ function App() {
           <Route
             path={"/chat/:id"}
             element={<Chat uid={uid} logginedUser={logginedUser} />}
+          />
+          <Route
+            path={"/liked/:id"}
+            element={
+              <MyInterest
+                data={data}
+                setData={setData}
+                uid={uid}
+                loggedIn={loggedIn}
+                admin={admin}
+              />
+            }
           />
         </Routes>
       </main>

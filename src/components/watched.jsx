@@ -38,6 +38,9 @@ const Watched = (props) => {
               <div className="description">
                 <h5 className="title">{recentItem[i].상품명}</h5>
                 <p className="date">{recentItem[i].날짜.toLocaleString()}</p>
+                <p className="like">
+                  <i className="fa fa-heart-o"></i> {props.data[i].likeCount}
+                </p>
                 <p className="price">
                   {parseInt(recentItem[i].가격).toLocaleString()}원
                 </p>

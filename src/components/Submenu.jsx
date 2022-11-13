@@ -47,6 +47,14 @@ const SubMenu = (props) => {
             >
               내 거래
             </li>
+            <li
+              onClick={() => {
+                navigate(`/liked/${props.uid}`);
+                props.setSub(false);
+              }}
+            >
+              관심상품
+            </li>
           </>
         ) : (
           <li
