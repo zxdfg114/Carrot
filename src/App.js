@@ -37,16 +37,11 @@ function App() {
     result.forEach((doc) => {
       let items = doc.data();
       items.id = doc.id;
-      doc.ref
-        .collection("like")
-        .get()
-        .then((doc) => {
-          items.likeCount = doc.size;
-        })
-        .then(() => {
-          _data.push(items);
-          setData([].concat(_data));
-        }); //이게 완료되면 밑에 실행함
+      doc.ref.collection("like").onSnapshot((doc) => {
+        items.likeCount = doc.size;
+        _data.push(items);
+        setData([].concat(_data));
+      });
     });
   }
   console.log(data);
