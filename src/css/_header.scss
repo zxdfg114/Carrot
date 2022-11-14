@@ -13,7 +13,24 @@ header {
 
   span {
     cursor: pointer;
-    color: #eee;
+    color: #333;
+  }
+
+  #logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+
+    h3 {
+      color: #ff8a3d;
+      font-size: 30px;
+      font-weight: bold;
+    }
   }
 
   .gnb {
@@ -75,7 +92,8 @@ header {
     }
 
     span {
-      color: #fff;
+      color: #111;
+      font-weight: bold;
     }
 
     li {
@@ -92,7 +110,7 @@ header {
         border: 1px solid white;
         background-color: dodgerblue;
         opacity: 1;
-        color: white;
+        color: #000;
       }
     }
   }

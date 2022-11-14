@@ -191,6 +191,7 @@ const Detail = (props) => {
                 )}
               </Button>
               <Button
+                color="warning"
                 variant="contained"
                 style={{
                   border: "0",
@@ -201,7 +202,7 @@ const Detail = (props) => {
                   checkOverlap();
                 }}
               >
-                1:1 채팅
+                채팅으로 거래하기
               </Button>
             </>
           ) : null}
@@ -214,7 +215,7 @@ const Detail = (props) => {
                 navigate("/signin");
               }}
             >
-              로그인 후 판매자와 채팅 이용이 가능합니다
+              로그인 하고 채팅으로 거래하기
             </Button>
           )}
           {data.uid === props.uid || props.admin ? (

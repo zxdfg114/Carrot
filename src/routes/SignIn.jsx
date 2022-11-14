@@ -42,13 +42,18 @@ const SignIn = (props) => {
         }}
       >
         <label htmlFor="title">이메일</label>
-        <input type="text" placeholder="이메일을 입력해주세요" />
+        <input
+          type="text"
+          placeholder="이메일을 입력해주세요"
+          defaultValue={"guest@guest.com"}
+        />
         <label htmlFor="password">비밀번호</label>
         <input
           type="password"
           autoComplete="off"
           placeholder="비밀번호를 입력해주세요"
           minLength="6"
+          defaultValue={123456}
           required
         />
         <small

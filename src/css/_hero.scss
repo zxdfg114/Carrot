@@ -1,26 +1,36 @@
 .hero {
-  background-image: linear-gradient(to right, #4286f4, #373b44);
+  background-color: #fbf7f2;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 40vw;
 
   section {
     width: 30%;
+    font-family: "Noto Sans KR";
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
     h1 {
-      text-align: center;
-      color: #fff;
-      font-size: 3vw;
-      font-family: "Permanant Marker", cursive;
+      color: #111;
+      font-size: 48px;
+      font-weight: bold;
     }
 
     p {
-      text-indent: 1vw;
-      font-size: 1vw;
-      color: #fff;
+      margin-top: 2rem;
+      font-size: 1rem;
+      color: #111;
     }
+  }
+
+  img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -37,9 +47,13 @@
       width: 50%;
 
       h1 {
-        font-size: 24px;
+        font-size: 36px;
         transform: rotate(0.04deg);
       }
+    }
+
+    img {
+      height: 100%;
     }
   }
 }
@@ -47,6 +61,18 @@
 @media screen and (max-width: 780px) {
   .hero {
     section {
+      width: 30%;
+      height: 90%;
+      h1 {
+        font-size: 24px;
+        transform: rotate(0.04deg);
+      }
+
+      p {
+        width: 70%;
+        font-size: 14px;
+      }
+
       width: 80%;
     }
   }

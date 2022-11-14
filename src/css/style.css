@@ -33,14 +33,15 @@
 
 .chat-box {
   background: #eee;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 30px 30px 30px 0;
   float: left;
 }
 
 .mine {
   float: right;
   background-color: #f1aa59;
+  border-radius: 30px 30px 0 30px;
   color: #fff;
 }
 
@@ -205,7 +206,21 @@ header {
 }
 header span {
   cursor: pointer;
-  color: #eee;
+  color: #333;
+}
+header #logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+header #logo img {
+  width: 30px;
+  height: 30px;
+}
+header #logo h3 {
+  color: #ff8a3d;
+  font-size: 30px;
+  font-weight: bold;
 }
 header .gnb {
   display: flex;
@@ -258,7 +273,8 @@ header .user div {
   white-space: nowrap;
 }
 header .user span {
-  color: #fff;
+  color: #111;
+  font-weight: bold;
 }
 header .user li {
   margin-left: 10px;
@@ -274,7 +290,7 @@ header .user li:hover {
   border: 1px solid white;
   background-color: dodgerblue;
   opacity: 1;
-  color: white;
+  color: #000;
 }
 
 @media screen and (max-width: 1080px) {
@@ -332,26 +348,36 @@ footer small {
   }
 }
 .hero {
-  background-image: linear-gradient(to right, #4286f4, #373b44);
+  background-color: #fbf7f2;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 40vw;
 }
 .hero section {
   width: 30%;
+  font-family: "Noto Sans KR";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 .hero section h1 {
-  text-align: center;
-  color: #fff;
-  font-size: 3vw;
-  font-family: "Permanant Marker", cursive;
+  color: #111;
+  font-size: 48px;
+  font-weight: bold;
 }
 .hero section p {
-  text-indent: 1vw;
-  font-size: 1vw;
-  color: #fff;
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #111;
+}
+.hero img {
+  width: 50%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .trade {
@@ -366,13 +392,26 @@ footer small {
     width: 50%;
   }
   .hero section h1 {
-    font-size: 24px;
+    font-size: 36px;
     transform: rotate(0.04deg);
+  }
+  .hero img {
+    height: 100%;
   }
 }
 @media screen and (max-width: 780px) {
   .hero section {
+    width: 30%;
+    height: 90%;
     width: 80%;
+  }
+  .hero section h1 {
+    font-size: 24px;
+    transform: rotate(0.04deg);
+  }
+  .hero section p {
+    width: 70%;
+    font-size: 14px;
   }
 }
 .wrap {

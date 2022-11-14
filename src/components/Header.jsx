@@ -15,16 +15,22 @@ import { useNavigate } from "react-router-dom";
 import SubMenu from "./Submenu";
 import firebase from "firebase/app";
 import Badge from "@mui/material/Badge";
+import { red } from "@mui/material/colors";
 
 import "firebase/auth";
 
 export default function Header(props) {
+  const color = red[0];
   const navigate = useNavigate();
   const [sub, setSub] = useState(false);
 
   return (
     <>
-      <AppBar position="fixed" color="warning">
+      <AppBar
+        position="fixed"
+        color="transparent"
+        style={{ backgroundColor: "#fff" }}
+      >
         <Toolbar
           style={{
             display: "flex",
@@ -34,7 +40,7 @@ export default function Header(props) {
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
+            color="warning"
             aria-label="menu"
             sx={{ mr: 2 }}
             onClick={() => {
@@ -50,16 +56,16 @@ export default function Header(props) {
               uid={props.uid}
             />
           )}
-          <Typography
-            variant="h3"
-            component="div"
-            sx={{}}
+          <div
+            id="logo"
             onClick={() => {
               navigate("/");
             }}
           >
-            MARKET
-          </Typography>
+            <img src={process.env.PUBLIC_URL + "/image/logo.png"} alt="" />
+            <h3>당근마켓</h3>
+          </div>
+
           {/* 로그인 상태에 따라 로그인 로그아웃 변경 */}
           <div className="user">
             {props.user === null ? null : (
@@ -75,7 +81,7 @@ export default function Header(props) {
                   <IconButton
                     size="large"
                     edge="start"
-                    color="inherit"
+                    color="warning"
                     aria-label="menu"
                     sx={{ mr: 2 }}
                     onClick={() => {
@@ -84,11 +90,12 @@ export default function Header(props) {
                   >
                     {" "}
                     <Badge
-                      badgeContent={props.logginedUser?.message ? "?" : null}
-                      color="error"
+                      badgeContent={props.logginedUser?.message ? " " : null}
+                      color="success"
                     >
                       <MailOutlinedIcon
                         variant="h2"
+                        color="warning"
                         onClick={(e) => {
                           e.stopPropagation();
                           navigate(`/chat/${props.uid}`);
@@ -104,8 +111,8 @@ export default function Header(props) {
                     navigate("/");
                   }}
                 >
-                  <AccountCircle />
-                  {`${props.user}`}
+                  <AccountCircle color="primary" />
+                  <span> {`${props.user}`}</span>
                 </Typography>
               </>
             )}
@@ -114,7 +121,7 @@ export default function Header(props) {
               <>
                 <Tooltip title="로그인이 필요합니다" placement="bottom">
                   <Button
-                    color="inherit"
+                    color="warning"
                     onClick={() => {
                       navigate("/signin");
                       setSub(false);
@@ -125,7 +132,7 @@ export default function Header(props) {
                 </Tooltip>
                 <Tooltip title="회원가입" placement="bottom">
                   <Button
-                    color="inherit"
+                    color="warning"
                     onClick={() => {
                       navigate("/signup");
                       setSub(false);
@@ -139,7 +146,7 @@ export default function Header(props) {
             {props.loggedIn && (
               <Tooltip title="로그아웃" placement="bottom">
                 <Button
-                  color="inherit"
+                  color="warning"
                   onClick={() => {
                     firebase
                       .auth()
