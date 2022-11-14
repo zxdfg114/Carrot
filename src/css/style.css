@@ -273,8 +273,11 @@ header .user div {
   white-space: nowrap;
 }
 header .user span {
-  color: #111;
+  color: #eee;
   font-weight: bold;
+}
+header .user .user-name {
+  color: #111;
 }
 header .user li {
   margin-left: 10px;

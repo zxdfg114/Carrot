@@ -90,8 +90,8 @@ export default function Header(props) {
                   >
                     {" "}
                     <Badge
-                      badgeContent={props.logginedUser?.message ? " " : null}
-                      color="success"
+                      badgeContent={props.logginedUser?.message ? "!" : null}
+                      color="error"
                     >
                       <MailOutlinedIcon
                         variant="h2"
@@ -112,7 +112,7 @@ export default function Header(props) {
                   }}
                 >
                   <AccountCircle color="primary" />
-                  <span> {`${props.user}`}</span>
+                  <span className="user-name"> {`${props.user}`}</span>
                 </Typography>
               </>
             )}
