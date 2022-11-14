@@ -55,7 +55,7 @@ function App() {
         })
         .then(() => {
           items.id = doc.id;
-          _data.push(items);
+          _data.unshift(items);
           //문제의 state 변경을 조금 늦게 처리하여 성능개선
           startTransition(() => {
             setData([].concat(_data));

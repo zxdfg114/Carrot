@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../index";
 import Button from "@mui/material/Button";
 
-
 const MyInterest = (props) => {
   const [data, setData] = useState([]);
   const _data = [...data];
@@ -21,7 +20,7 @@ const MyInterest = (props) => {
       likeResult.forEach((x) => {
         items.id = doc.id;
         const didIliked = x.data().like;
-        if (id === didIliked) {
+        if (id === didIliked && likeResult !== null) {
           items.likeCount = likeResult.size;
           _data.push(items);
           setData([].concat(_data));

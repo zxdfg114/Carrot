@@ -5,13 +5,14 @@ import "firebase/firestore";
 const HotItems = (props) => {
   const navigate = useNavigate();
 
-  const _data = props.data
+  //전체상품 목록도 좋아요 순서로 정렬되던 버그 수정을위해 Spread Operator 사용
+  const _data = [...props.data]
     .sort((a, b) => {
       return b.likeCount - a.likeCount;
     })
     .slice(0, 8);
 
-  useDeferredValue(props.data);
+  useDeferredValue(_data);
 
   return (
     <>
