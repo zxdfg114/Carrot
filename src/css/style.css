@@ -403,15 +403,14 @@ footer small {
   .hero section {
     width: 30%;
     height: 90%;
-    width: 80%;
+    justify-content: center;
   }
   .hero section h1 {
     font-size: 24px;
     transform: rotate(0.04deg);
   }
   .hero section p {
-    width: 70%;
-    font-size: 14px;
+    display: none;
   }
 }
 .wrap {

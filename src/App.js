@@ -26,13 +26,17 @@ function App() {
   arr ?? localStorage.setItem("watched", JSON.stringify([]));
   const [data, setData] = useState([]);
 
+  //이름 저장할 state
   const [user, setUser] = useState(null);
-
+  //user collection에 저장
   const [logginedUser, setLogginedUser] = useState(null);
+  //admin 이면 true
   const [admin, setAdmin] = useState(false);
+  //로그인 됐나 안됐나 판단
   const [loggedIn, setLoggedIn] = useState(false);
+  //고유 uid state로 저장하여 활용
   const [uid, setUid] = useState(null);
-  // data state는 배열이라서 !
+  // data state는 배열이라서 복사 필요
   const _data = [...data];
 
   let [isPending, startTransition] = useTransition();
@@ -97,10 +101,12 @@ function App() {
     return getData();
   }, []);
 
+  //최근본 상품 기능을 위한 로컬스토리지 활용
   let [watched, setWatched] = useState(
     JSON.parse(localStorage.getItem("watched"))
   );
 
+  //변경시 렌더링을 위해 concat 사용
   useEffect(() => {
     setWatched([].concat(JSON.parse(localStorage.getItem("watched"))));
   }, []);

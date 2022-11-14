@@ -63,17 +63,15 @@
     section {
       width: 30%;
       height: 90%;
+      justify-content: center;
       h1 {
         font-size: 24px;
         transform: rotate(0.04deg);
       }
 
       p {
-        width: 70%;
-        font-size: 14px;
+        display: none;
       }
-
-      width: 80%;
     }
   }
 }
