@@ -690,6 +690,10 @@ body::-webkit-scrollbar {
   padding: 5% 10%;
   border: 1px solid #eee;
   color: #111;
+  transition: all 0.3s;
+}
+.sub li:hover {
+  color: #ff8a3d;
 }
 .sub li:nth-child(1) {
   text-align: right;

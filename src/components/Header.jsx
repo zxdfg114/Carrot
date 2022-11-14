@@ -82,7 +82,6 @@ export default function Header(props) {
                     size="large"
                     edge="start"
                     color="warning"
-                    aria-label="menu"
                     sx={{ mr: 2 }}
                     onClick={() => {
                       setSub(true);

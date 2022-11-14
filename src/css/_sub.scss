@@ -15,6 +15,11 @@
     padding: 5% 10%;
     border: 1px solid #eee;
     color: #111;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #ff8a3d;
+    }
 
     &:nth-child(1) {
       text-align: right;

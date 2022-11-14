@@ -5,7 +5,8 @@ const Watched = (props) => {
   const navigate = useNavigate();
   let watched = JSON.parse(localStorage.getItem("watched"));
   let [watchedId, setWatchedId] = useState(watched);
-  const recentItem = props.data.filter((x) => watchedId.includes(x.id));
+  const recentItem = [...props.data.filter((x) => watchedId.includes(x.id))];
+
   useEffect(() => {
     setWatchedId(watched);
   }, []);
