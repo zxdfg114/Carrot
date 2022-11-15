@@ -1,6 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState, useTransition, useMemo, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserUid } from "./store/store";
 import { db } from "./index";
 import "firebase/firestore";
 import firebase from "firebase/app";
@@ -22,6 +24,8 @@ import HotItems from "./components/HotItems";
 import MyInterest from "./routes/MyInterest";
 
 function App() {
+  const dispatch = useDispatch();
+
   const arr = JSON.parse(localStorage.getItem("watched"));
   arr ?? localStorage.setItem("watched", JSON.stringify([]));
   const [data, setData] = useState([]);
@@ -84,6 +88,8 @@ function App() {
         setLoggedIn(true);
         setUser(user.displayName);
         setUid(user.uid);
+        //dispatch(state변경함수(바꿀내용))
+        dispatch(setUserUid(user.uid));
         getUser(user.uid);
         if (user.email === "chat3@gmail.com") {
           setAdmin(true);
@@ -92,6 +98,7 @@ function App() {
         setUser(null);
         setLoggedIn(false);
         setUid(null);
+        dispatch(setUserUid(null));
         setAdmin(false);
       }
     });

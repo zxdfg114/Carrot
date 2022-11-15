@@ -98,10 +98,8 @@ const Chat = (props) => {
     db.collection("user")
       .doc(chatRoom[i].who.filter((x) => x !== props.uid)[0])
       .update({ message: bool });
-    console.log("업데이트");
   }
 
-  console.log(chatRoom);
 
   useEffect(() => {
     db.collection("user") //

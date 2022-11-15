@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import { db } from "../index";
 import DeleteModal from "../components/DeleteModal";
+//store에 있는 state 가져다 쓰기
+import { useSelector } from "react-redux";
 
 const Detail = (props) => {
   //data는 이 페이지에서만 사용할 state
@@ -13,6 +15,8 @@ const Detail = (props) => {
   const [liked, setLiked] = useState(false);
   const { id } = useParams();
   const [modalShow, setModalShow] = React.useState(false);
+  //state는 store에 저장된 모든 state, 출력은 state.[내가 저장한]
+  let state = useSelector((state) => state);
 
   //컴포넌트 로딩시 데이터 받아옴
   async function detailData() {
@@ -30,7 +34,7 @@ const Detail = (props) => {
   async function checkOverlap() {
     const dbData = db
       .collection("chatroom")
-      .where("who", "array-contains", props.uid)
+      .where("who", "array-contains", state.userUid)
       .where("product", "==", data.상품명)
       .get();
     const result = await dbData;
@@ -38,17 +42,17 @@ const Detail = (props) => {
     if (result.size === 0) {
       db.collection("chatroom")
         .add({
-          who: [props.uid, data.uid],
+          who: [state.userUid, data.uid],
           date: new Date(),
           product: data.상품명,
         })
         .then(() => {
           console.log("새로운 채팅방 개설 성공!");
-          navigate(`/chat/${props.uid}`);
+          navigate(`/chat/${state.userUid}`);
         });
     } else {
       console.log("이미 개설된 채팅방이 있습니다");
-      navigate(`/chat/${props.uid}`);
+      navigate(`/chat/${state.userUid}`);
     }
   }
 
@@ -59,15 +63,15 @@ const Detail = (props) => {
       .collection("product")
       .doc(id)
       .collection("like")
-      .doc(props.uid)
+      .doc(state.userUid)
       .get();
     const result = await like;
     if (result.exists === false) {
       db.collection("product")
         .doc(id)
         .collection("like")
-        .doc(props.uid)
-        .set({ like: props.uid })
+        .doc(state.userUid)
+        .set({ like: state.userUid })
         .then((doc) => {
           console.log(doc);
           detailData(); // 추가시 데이터 다시 받아옴
@@ -77,7 +81,7 @@ const Detail = (props) => {
       db.collection("product")
         .doc(id)
         .collection("like")
-        .doc(props.uid)
+        .doc(state.userUid)
         .get()
         .then((doc) => {
           doc.ref.delete();
@@ -94,7 +98,7 @@ const Detail = (props) => {
       .collection("product")
       .doc(id)
       .collection("like")
-      .where("like", "==", props.uid)
+      .where("like", "==", state.userUid)
       .get();
     const result = await liked;
     if (result.size === 1) {
@@ -154,7 +158,7 @@ const Detail = (props) => {
           <p className="price">{parseInt(data.가격).toLocaleString()}원</p>
           <p className="desc">{data.내용}</p>
 
-          {data.uid === props.uid || props.admin ? (
+          {data.uid === state.userUid || props.admin ? (
             <Button
               variant="contained"
               onClick={() => {
@@ -170,7 +174,7 @@ const Detail = (props) => {
           )}
 
           {/* 로그인된 유저와 게시물 작성자가 다를경우에만 + 로그인이 되어있을때에만 채팅방 만들기 보이게 설정*/}
-          {data.uid !== props.uid && props.loggedIn ? (
+          {data.uid !== state.userUid && props.loggedIn ? (
             <>
               <Button
                 style={{
@@ -218,7 +222,7 @@ const Detail = (props) => {
               로그인 하고 채팅으로 거래하기
             </Button>
           )}
-          {data.uid === props.uid || props.admin ? (
+          {data.uid === state.userUid || props.admin ? (
             <Button
               variant="outlined"
               color="error"

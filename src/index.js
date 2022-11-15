@@ -9,12 +9,13 @@ import "firebase/firestore";
 import "firebase/firebase-storage";
 import "firebase/firebase-auth";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Reset } from "styled-reset";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 import ScrollToTop from "./components/ScrollToTop";
+
 import "./css/style.min.css";
 
 const queryClient = new QueryClient();
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyBdO-irCCWskpTCMHt4Pe81RQgaRg38Z5g",
@@ -33,8 +34,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
     <HashRouter>
-      <ScrollToTop />
-      <App />
+      <Provider store={store}>
+        <ScrollToTop />
+        <App />
+      </Provider>
     </HashRouter>
   </QueryClientProvider>
 );

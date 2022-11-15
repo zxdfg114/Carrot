@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { storage } from "../index";
@@ -14,7 +15,7 @@ const Upload = (props) => {
   const [prdcTitle, setPrdcTitle] = useState(" ");
   let modalTitle = `상품 등록 완료!`;
   let modalContent = `상품이 정상적으로 등록되었습니다`;
-  console.log(props.user);
+  const state = useSelector((state) => state);
 
   return (
     <div className="container">
@@ -55,7 +56,7 @@ const Upload = (props) => {
                   내용: e.target[3].value,
                   날짜: new Date().toLocaleString(),
                   image: url,
-                  uid: props.uid,
+                  uid: state.userUid,
                   작성자: props.user,
                 };
 
@@ -77,9 +78,19 @@ const Upload = (props) => {
         }}
       >
         <label htmlFor="title">상품명</label>
-        <input type="text" name="title" placeholder="상품명을 입력해주세요" />
+        <input
+          type="text"
+          name="title"
+          placeholder="상품명을 입력해주세요"
+          required
+        />
         <label htmlFor="price">가격</label>
-        <input type="number" name="price" placeholder="가격을 입력해주세요" />
+        <input
+          type="number"
+          name="price"
+          placeholder="가격을 입력해주세요"
+          required
+        />
         <label htmlFor="image" className="custom-file-upload">
           사진{" "}
         </label>

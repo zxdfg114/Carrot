@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { useSelector } from "react-redux";
 import { db } from "../index";
 import "firebase/firestore";
 import firebase from "firebase/app";
@@ -19,6 +20,7 @@ const Edit = (props) => {
   const [prdcTitle, setPrdcTitle] = useState(" ");
   const modalTitle = `상품 등록 완료!`;
   const modalContent = `상품이 정상적으로 등록되었습니다`;
+  const state = useSelector((state) => state);
 
   async function editData() {
     const detail = db.collection("product").doc(product).get();
@@ -71,7 +73,7 @@ const Edit = (props) => {
                   내용: e.target[3].value,
                   날짜: new Date().toLocaleString(),
                   image: url,
-                  uid: props.uid,
+                  uid: state.userUid,
                   작성자: props.user,
                   id: product,
                 };
@@ -111,10 +113,7 @@ const Edit = (props) => {
           defaultValue={data.가격}
           required
         />
-        <label
-          htmlFor="image"
-          className="custom-file-upload"
-        >
+        <label htmlFor="image" className="custom-file-upload">
           사진{" "}
         </label>
         <Form.Control type="file" size="md" defaultValue={data.image} />

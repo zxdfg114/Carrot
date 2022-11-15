@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
-
+import { useSelector } from "react-redux";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -23,7 +23,7 @@ export default function Header(props) {
   const color = red[0];
   const navigate = useNavigate();
   const [sub, setSub] = useState(false);
-
+  const state = useSelector((state) => state);
   return (
     <>
       <AppBar
@@ -53,7 +53,7 @@ export default function Header(props) {
             <SubMenu
               setSub={setSub}
               loggedIn={props.loggedIn}
-              uid={props.uid}
+              uid={state.userUid}
             />
           )}
           <div
@@ -98,7 +98,7 @@ export default function Header(props) {
                         color="warning"
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(`/chat/${props.uid}`);
+                          navigate(`/chat/${state.userUid}`);
                         }}
                       />
                     </Badge>
