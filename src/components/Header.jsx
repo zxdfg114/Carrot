@@ -91,6 +91,7 @@ export default function Header(props) {
                     <Badge
                       badgeContent={props.logginedUser?.message ? "!" : null}
                       color="error"
+                      className="mail"
                     >
                       <MailOutlinedIcon
                         variant="h2"
@@ -105,6 +106,7 @@ export default function Header(props) {
                 </Tooltip>
                 <Typography
                   variant="caption"
+                  className="user-name"
                   component="div"
                   onClick={() => {
                     navigate("/");

@@ -284,6 +284,9 @@ header .user span {
 }
 header .user .user-name {
   color: #111;
+  display: inline-flex;
+  align-items: center;
+  transform: translateY(-1px);
 }
 header .user li {
   margin-left: 10px;
@@ -320,8 +323,35 @@ header .user li:hover {
   }
 }
 @media screen and (max-width: 780px) {
+  #logo h3 {
+    font-size: 16px;
+  }
   .login-required {
     display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  header #logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  header #logo h3 {
+    display: none;
+  }
+  header .user {
+    position: static;
+  }
+  header .user button {
+    margin: 0;
+    font-size: 12px;
+  }
+  header .user .mail {
+    position: fixed;
+    left: 50px;
+  }
+  header .user .user-name {
+    font-size: 12px;
   }
 }
 footer {
@@ -354,6 +384,11 @@ footer small {
   }
   footer * {
     font-size: 10px;
+  }
+}
+@media screen and (max-width: 500px) {
+  footer {
+    flex-direction: column;
   }
 }
 .hero {
@@ -415,7 +450,7 @@ footer small {
     justify-content: center;
   }
   .hero section h1 {
-    font-size: 24px;
+    font-size: 20px;
     transform: rotate(0.04deg);
   }
   .hero section p {
