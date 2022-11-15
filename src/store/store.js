@@ -6,7 +6,6 @@ let userUid = createSlice({
   // 1. 변경함수 설정
   reducers: {
     setUserUid(state, action) {
-      //파라미터로 바꾸려면 .payload 붙여줘야함
       return action.payload;
     },
   },

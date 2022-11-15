@@ -87,7 +87,6 @@ function App() {
       if (user) {
         setLoggedIn(true);
         setUser(user.displayName);
-        setUid(user.uid);
         //dispatch(state변경함수(바꿀내용))
         dispatch(setUserUid(user.uid));
         getUser(user.uid);
@@ -126,7 +125,6 @@ function App() {
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
         logginedUser={logginedUser}
-        uid={uid}
       />
       <main>
         <Suspense>
@@ -165,7 +163,6 @@ function App() {
                 <Detail
                   data={data}
                   setData={setData}
-                  uid={uid}
                   loggedIn={loggedIn}
                   admin={admin}
                 />
@@ -177,7 +174,6 @@ function App() {
                 <MyPost
                   data={data}
                   setData={setData}
-                  uid={uid}
                   loggedIn={loggedIn}
                   admin={admin}
                 />
@@ -185,9 +181,7 @@ function App() {
             />
             <Route
               path={"/edit/:product"}
-              element={
-                <Edit data={data} setData={setData} uid={uid} user={user} />
-              }
+              element={<Edit data={data} setData={setData} user={user} />}
             />
             <Route
               path={"/chat/:id"}
@@ -199,7 +193,6 @@ function App() {
                 <MyInterest
                   data={data}
                   setData={setData}
-                  uid={uid}
                   loggedIn={loggedIn}
                   admin={admin}
                 />

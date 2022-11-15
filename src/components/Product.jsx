@@ -4,12 +4,6 @@ import "firebase/firestore";
 
 const Product = (props) => {
   const navigate = useNavigate();
-  const date = new Date();
-
-  const sortedData = props.data.sort((a, b) => {
-    return parseInt(date.getTime(b.날짜)) - parseInt(date.getTime(a.날짜));
-  });
-
   return (
     <>
       <div className="wrap">
