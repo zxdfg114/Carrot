@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# 당근마켓 프로젝트 Readme
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 유저 간 거래 서비스인 당근마켓 클론 프로젝트
 
-In the project directory, you can run:
+### 🚩개발 인원 및 기간
 
-### `npm start`
+- 개발 인원 : 1인 개발
+- 개발 기간 : 3주
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🌝개발 목적
 
-### `npm test`
+ 유저의 게시물 업로드와 유저간의 채팅을 통해 커뮤니케이션 할 수 있는 웹사이트입니다. React 숙련도를 향상시키고, 데이터베이스와의 연동을 통해 데이터 영구저장이 가능한 사이트를 만들어 보고자 시작하였습니다. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Firebase** 서비스를 사용해봤다는 것에서 의미가 있었고, 그 과정에서 NoSQL을 React환경에서 사용해 볼 수 있었다는 점에서 더욱 의미가 있었습니다.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ▶️ 사용 기술
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **React**
+    - React-Router
+    - React-BootStrap
+    - MUI
+- SASS
+    - SCSS
+- Redux-Toolkit, React-Redux
+- JavaScript
+- **Firebase** version8
+    - Firebase Auth
+    - Firestore
+    - Storage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### 🎯 구현한 기능
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 일반 회원가입 기능 - 회원가입, 로그인, 로그아웃
+    - 로그인 상태에 따라 보여지는 UI가 다르게 개발하였습니다.
+- 유저의 게시물 업로드 기능
+    - 로그인된 유저에 한해 게시물 업로드가 가능합니다. 클라이언트에서는 로그인 하지 않았을 시 업로드 버튼이 보이지 않도록 설정하였으며, Firestore Rule 에서도 로그인이 되어있을 때에만 데이터 수정 권한을 부여하였습니다.
+- 게시물 수정 및 삭제 기능
+    - 유저는 자신의 게시물에 한해서 게시물의 수정과 삭제가 가능하며, 별도로 AdminUser를 생성하여 모든 게시물에 대해 수정과 삭제가 가능하도록 하였습니다.
+- 최근 본 상품 기능
+    - 로컬 스토리지를 활용하여 개발하였습니다.
+- 반응형 화면 구현
+    - 미디어 쿼리를 사용하였습니다.
+- 좋아요 기능
+    - 상품의 서브컬렉션으로 생성하였으며, product 문서의 서브컬렉션으로 유저의 uid를 저장하는 방식입니다
+    - 좋아요 갯수가 많은 상품을 상단에 출력하도록 하였습니다.
+    - 로그인 한 유저는 자신이 좋아요를 누른 상품을 따로 모아서 볼 수있도록 하였습니다.
+    - 상세페이지 접속 시 좋아요를 누른 상태가 확인되도록 구현하였습니다.
+- 실시간 채팅 기능 + 알림기능
+    - fireStore의 `.onSnapshot()` 을 사용해 구현 하였습니다.
+    - 새로운 메시지가 발행되었을 때 상대방 유저의 화면에서 새로운 메시지가 있음을 알려주는 별도의 UI를 추가하였습니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 💡개발 중 발생했던 문제 및 해결
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 채팅방 개발 과정에서 useState에 대한 이해가 부족한 부분이 있었습니다.
+    - Array.push 는 새로운 배열을 반환하지 않습니다. [].concat(Array) 를 사용하여 해결 하였습니다.
+- useEffect 무한루프를 만들어서 DB 할당량을 초과한적이 있습니다.
+    - 대충 안다고 쓰지말고 잘 알고 사용해야겠다는 생각을 했습니다.
+- 비동기 함수의 실행에 대한 보다 명확한 이해가 필요합니다.
+- 상세 페이지 접속시 데이터 바인딩이 되지 않은 화면이 노출되는 문제가 있었습니다. 페이지전환시 css transition을 주어 가렸습니다.
+- 게시물 수정 시 사진 파일은 defaultValue로 설정되지 않는 문제가 있습니다.
+- props로 전송한 데이터를 그대로 정렬하여 부모 컴포넌트의 state까지 변경되는 문제가 있었습니다. spread operator를 사용하여 해결하였습니다.
