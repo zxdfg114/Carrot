@@ -30,7 +30,7 @@
   - SCSS
 - Redux-Toolkit, React-Redux
 - JavaScript
-- **Firebase** version8
+- **Firebase** v8.6.5
   - Firebase Auth
   - Firestore
   - Storage
@@ -70,3 +70,4 @@
 - 상세 페이지 접속시 데이터 바인딩이 되지 않은 화면이 노출되는 문제가 있었습니다. 페이지전환시 css transition을 주어 가렸습니다.
 - 게시물 수정 시 사진 파일은 defaultValue로 설정되지 않는 문제가 있습니다.
 - props로 전송한 데이터를 그대로 정렬하여 부모 컴포넌트의 state까지 변경되는 문제가 있었습니다. spread operator를 사용하여 해결하였습니다.
+
